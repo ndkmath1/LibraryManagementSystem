@@ -5,17 +5,10 @@
  */
 package account.controller;
 
-import account.factory.AccountSystemFactory;
-import account.interfaces.IAccountSystem;
-
 /**
  *
  * @author Khanh Nguyen
  */
-public class AccountController {
-    
-    public static void main(String[] args) {
-        IAccountSystem s = AccountSystemFactory.getAccountSystem();
-    }
+public class SignUpController {
     
 }
