@@ -1,29 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package account.view;
 
+import com.sun.beans.util.Cache;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.util.Date;
+import javax.swing.ButtonGroup;
 import utils.AccountHelper;
 
-/**
- *
- * @author Khanh Nguyen
- */
-public class SignUpForm extends javax.swing.JFrame {
-
+public class SignUpForm extends javax.swing.JFrame implements ISignUpForm{
+    private ButtonGroup btnGroupTypeOfRegister;
+    private ButtonGroup btnGroupGender;
     /**
      * Creates new form SignUpForm
      */
     public SignUpForm() {
         initComponents();
+        btnGroupTypeOfRegister=new ButtonGroup();
+        btnGroupTypeOfRegister.add(rbtnNormal);
+        btnGroupTypeOfRegister.add(rbtnStudent);
         
+        btnGroupGender=new ButtonGroup();
+        btnGroupGender.add(rbtnFemale);
+        btnGroupGender.add(rbtnMale);
     }
-    
-    private void init(){
-        
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +47,6 @@ public class SignUpForm extends javax.swing.JFrame {
         tfEmail = new javax.swing.JTextField();
         tfAddress = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
-        tfDay = new javax.swing.JTextField();
         tfPhoneNumber = new javax.swing.JTextField();
         rbtnMale = new javax.swing.JRadioButton();
         rbtnFemale = new javax.swing.JRadioButton();
@@ -61,11 +60,8 @@ public class SignUpForm extends javax.swing.JFrame {
         btnRegister = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        tfYear = new javax.swing.JTextField();
-        tfMonth = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         tfPassword = new javax.swing.JPasswordField();
+        cbBoxBirthDay = new org.freixas.jcalendar.JCalendarCombo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,12 +85,6 @@ public class SignUpForm extends javax.swing.JFrame {
         lbName.setText("Họ, tên(*)");
 
         lbBirthday.setText("Ngày sinh(*)");
-
-        tfDay.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfDayKeyTyped(evt);
-            }
-        });
 
         rbtnMale.setSelected(true);
         rbtnMale.setText("Nam");
@@ -124,9 +114,8 @@ public class SignUpForm extends javax.swing.JFrame {
         plForStudentLayout.setHorizontalGroup(
             plForStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plForStudentLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(lbStudentID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(tfStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -161,105 +150,74 @@ public class SignUpForm extends javax.swing.JFrame {
         });
 
         btnRegister.setText("Đăng ký");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
 
         btnRefresh.setText("Nhập lại");
 
         btnBack.setText("Quay lại");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+
+        cbBoxBirthDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                cbBoxBirthDayActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("/");
-
-        tfYear.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfYearKeyTyped(evt);
-            }
-        });
-
-        tfMonth.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfMonthKeyTyped(evt);
-            }
-        });
-
-        jLabel5.setText("/");
 
         javax.swing.GroupLayout panelRegisterFormLayout = new javax.swing.GroupLayout(panelRegisterForm);
         panelRegisterForm.setLayout(panelRegisterFormLayout);
         panelRegisterFormLayout.setHorizontalGroup(
             panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegisterFormLayout.createSequentialGroup()
-                .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRegisterFormLayout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbtnNormal)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbtnStudent))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRegisterFormLayout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                .addGap(98, 98, 98)
+                .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
                         .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRegisterFormLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(btnRegister)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnRefresh)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addComponent(btnBack))
+                            .addGroup(panelRegisterFormLayout.createSequentialGroup()
+                                .addGap(93, 93, 93)
                                 .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
-                                        .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(lbName)
-                                            .addComponent(lbPhone)
-                                            .addComponent(lbEmail)
-                                            .addComponent(lbBirthday)
-                                            .addComponent(lbAddress)
-                                            .addComponent(lbGender))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(panelRegisterFormLayout.createSequentialGroup()
-                                                .addComponent(tfDay, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tfMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(5, 5, 5)
-                                                .addComponent(jLabel5)
-                                                .addGap(9, 9, 9)
-                                                .addComponent(tfYear, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegisterFormLayout.createSequentialGroup()
-                                                .addComponent(rbtnMale)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(rbtnFemale))
-                                            .addComponent(tfUsername)
-                                            .addComponent(tfName)
-                                            .addComponent(tfPhoneNumber)
-                                            .addComponent(tfEmail)
-                                            .addComponent(tfAddress, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
-                                        .addGap(103, 103, 103)
-                                        .addComponent(jLabel13))
-                                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
-                                        .addGap(93, 93, 93)
-                                        .addComponent(jLabel1))
-                                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btnRegister)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(btnRefresh)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnBack)))
-                                .addGap(24, 24, 24))
-                            .addComponent(plForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(107, 107, 107))
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegisterFormLayout.createSequentialGroup()
+                                .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(lbName)
+                                    .addComponent(lbPhone)
+                                    .addComponent(lbEmail)
+                                    .addComponent(lbBirthday)
+                                    .addComponent(lbAddress)
+                                    .addComponent(lbGender)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfPassword)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegisterFormLayout.createSequentialGroup()
+                                        .addComponent(rbtnMale)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                        .addComponent(rbtnFemale))
+                                    .addComponent(tfUsername)
+                                    .addComponent(tfName)
+                                    .addComponent(tfPhoneNumber)
+                                    .addComponent(tfEmail)
+                                    .addComponent(tfAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbBoxBirthDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(131, 131, 131))
+                    .addGroup(panelRegisterFormLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(56, 56, 56)
+                        .addComponent(rbtnNormal)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnStudent)
+                        .addGap(107, 107, 107))))
+            .addGroup(panelRegisterFormLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(plForStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelRegisterFormLayout.setVerticalGroup(
             panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,11 +258,7 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbBirthday)
-                    .addComponent(tfDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(cbBoxBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRegisterFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtnMale)
@@ -353,88 +307,21 @@ public class SignUpForm extends javax.swing.JFrame {
        
     }//GEN-LAST:event_rbtnStudentActionPerformed
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        if(AccountHelper.validateUsername(tfUsername.getText())) System.out.println("u:true");
-        else System.out.println("U:false");
-        
-        if(AccountHelper.validateEmail(tfEmail.getText())) System.out.println("e:true");
-        else System.out.println("e:fasle");
-        
-        if(AccountHelper.validatePassword(tfPassword.getText())) System.out.println("p:true");
-        else System.out.println("p:false");
-    }//GEN-LAST:event_btnRegisterActionPerformed
+    private void cbBoxBirthDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxBirthDayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbBoxBirthDayActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       
-    }//GEN-LAST:event_btnBackActionPerformed
-
-    private void tfDayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDayKeyTyped
-        boolean max = tfDay.getText().length() > 1;
-        if ( max ){
-            evt.consume();
-        }        
-    }//GEN-LAST:event_tfDayKeyTyped
-
-    private void tfMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMonthKeyTyped
-        boolean max = tfMonth.getText().length() > 1;
-        if ( max ){
-            evt.consume();
-        }       
-    }//GEN-LAST:event_tfMonthKeyTyped
-
-    private void tfYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfYearKeyTyped
-        boolean max = tfYear.getText().length() > 3;
-        if ( max ){
-            evt.consume();
-        }       
-    }//GEN-LAST:event_tfYearKeyTyped
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignUpForm().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRegister;
+    private org.freixas.jcalendar.JCalendarCombo cbBoxBirthDay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lbAddress;
     private javax.swing.JLabel lbBirthday;
     private javax.swing.JLabel lbEmail;
@@ -449,14 +336,97 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtnNormal;
     private javax.swing.JRadioButton rbtnStudent;
     private javax.swing.JTextField tfAddress;
-    private javax.swing.JTextField tfDay;
     private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfMonth;
     private javax.swing.JTextField tfName;
     private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfPhoneNumber;
     private javax.swing.JTextField tfStudentID;
     private javax.swing.JTextField tfUsername;
-    private javax.swing.JTextField tfYear;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void openSingupForm() {
+        this.setVisible(true);
+    }
+
+    @Override
+    public void closeSingupForm() {
+        this.setVisible(false);
+    }
+
+    @Override
+    public String getStudentIDOnSingupForm() {
+        return tfStudentID.getText();
+    }
+
+    @Override
+    public boolean getTypeOfRegisterOnSingupForm() {
+        return rbtnNormal.isSelected();
+    }
+
+    @Override
+    public String getUsernameOnSingupForm() {
+        return tfUsername.getText();
+    }
+
+    @Override
+    public String getPasswordOnSingupForm() {
+        return tfPassword.getText();
+    }
+
+    @Override
+    public String getNameOnSingupForm() {
+        return tfName.getText();
+    }
+
+    @Override
+    public String getEmailOnSingupForm() {
+        return tfEmail.getText();
+   }
+
+    @Override
+    public String getPhoneOnSingupForm() {
+        return tfPhoneNumber.getText();
+    }
+
+    @Override
+    public boolean getGenderOnSingupForm() {
+        return rbtnMale.isSelected();
+    }
+
+    @Override
+    public String getAddressOnSingupForm() {
+        return tfAddress.getText();
+    }
+
+    @Override
+    public void hidePanelEnterStudentInfo() {
+        plForStudent.setEnabled(false);
+    }
+
+    @Override
+    public void showPanelEnterStudentInfo() {
+        plForStudent.setEnabled(true);    
+    }
+
+
+    @Override
+    public void setButtonRegisterActionListener(ActionListener listener) {
+        btnRegister.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonRefreshActionListener(ActionListener listener) {
+        btnRefresh.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonBackActionListener(ActionListener listener) {
+        btnBack.addActionListener(listener);
+    }
+
+    @Override
+    public Date getComboboxBirthdayonSignForm() {
+        return cbBoxBirthDay.getDate();
+    }
 }
