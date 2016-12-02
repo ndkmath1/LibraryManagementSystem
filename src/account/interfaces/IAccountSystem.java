@@ -14,7 +14,9 @@ import model.AccountManager;
  * @author Khanh Nguyen
  */
 public interface IAccountSystem {
+
     public Account checkLogin(String email, String password);
-    
+
     public AccountManager checkManageLogin(String username, String password);
+    
 }
