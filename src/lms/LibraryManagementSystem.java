@@ -5,14 +5,22 @@
  */
 package lms;
 
+import javax.swing.SwingUtilities;
+import main.controller.MainController;
+
 /**
  *
  * @author Khanh Nguyen
  */
 public class LibraryManagementSystem {
-    
+
     public static void main(String[] args) {
-        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainController();
+            }
+        });
     }
-    
+
 }

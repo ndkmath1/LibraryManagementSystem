@@ -3,25 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package account.view;
+package main.view;
 
 import java.awt.event.ActionListener;
 
 /**
- * The ILogInForm list methods for LoginForm
  *
  * @author Khanh Nguyen
  */
-public interface ILogInForm {
-
-    public void setLoginButtonActionListener(ActionListener listener);
-
-    public String getUserNameEmailOnLoginForm();
-    
-    public String getPasswordOnLoginForm();
+public interface IMainForm {
     
     public void closeForm();
     
     public void setVisibleForm(boolean isVisible);
-
+    
+    public void setLogInButtonActionListener(ActionListener listener);
+    
+    public void setExitButtonActionListener(ActionListener listener);
+    
+    public void nontifiesUserExitApp();
+    
 }

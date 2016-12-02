@@ -183,5 +183,10 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
     public void closeForm() {
         super.dispose();
     }
-    
+
+    @Override
+    public void setVisibleForm(boolean isVisible) {
+        setVisible(isVisible);
+    }
+
 }

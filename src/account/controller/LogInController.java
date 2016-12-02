@@ -16,19 +16,24 @@ import account.view.ILogInForm;
  *
  * @author Khanh Nguyen
  */
-public class LoginController {
+public class LogInController {
     private ILogInForm loginForm;
     //example for using subsystem
     IAccountSystem s = AccountSystemFactory.getAccountSystem();
     
-    public LoginController () {
+    public LogInController () {
         loginForm = new LogInForm();
-        loginForm.setLoginButtonActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
+        loginForm.setVisibleForm(true);
+        loginForm.setLoginButtonActionListener(new LogInButtonActionListener());
+    }
+    
+    private class LogInButtonActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }
+        
     }
     
 }
