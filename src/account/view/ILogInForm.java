@@ -20,8 +20,18 @@ public interface ILogInForm {
     
     public String getPasswordOnLoginForm();
     
+    public void setBackButtonActionListener(ActionListener listener);
+    
+    public void setRegisterButtonActionListener(ActionListener listener);
+    
     public void closeForm();
     
     public void setVisibleForm(boolean isVisible);
+    
+    public void noticeError(String title, String message);
+    
+    public void noticeSuccessfully(String title, String message);
+    
+    public int getComboboxSelectedOnLoginForm();
 
 }

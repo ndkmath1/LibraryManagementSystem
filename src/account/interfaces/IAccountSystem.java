@@ -5,11 +5,16 @@
  */
 package account.interfaces;
 
+import model.Account;
+import model.AccountManager;
+
 /**
  * Define responsibility of AccountSystem
  *
  * @author Khanh Nguyen
  */
 public interface IAccountSystem {
+    public Account checkLogin(String email, String password);
     
+    public AccountManager checkManageLogin(String username, String password);
 }

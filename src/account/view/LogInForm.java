@@ -7,13 +7,14 @@ package account.view;
 
 import constants.LoginConstants;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Khanh Nguyen
  */
 public class LogInForm extends javax.swing.JFrame implements ILogInForm {
-
+   
     /**
      * Creates new form LoginForm
      */
@@ -36,19 +37,24 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
         lbPassword = new javax.swing.JLabel();
         tfUsernameEmail = new javax.swing.JTextField();
         tfPassword = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        cbBoxTypeOfAccount = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnLogin.setText("jButton1");
+        btnLogin.setText("Đăng nhập");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
-        lbUsernameEmail.setText("jLabel1");
+        lbUsernameEmail.setText("Tên đăng nhập hoặc email");
 
-        lbPassword.setText("jLabel2");
+        lbPassword.setText("Mật khẩu");
 
         tfUsernameEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,40 +68,67 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("THÔNG TIN ĐĂNG NHẬP");
+
+        btnBack.setText("Quay lại");
+
+        btnRegister.setText("Đăng ký");
+
+        cbBoxTypeOfAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Người dùng", "Quản lý" }));
+
+        jLabel2.setText("Loại tài khoản");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addGap(193, 193, 193))
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbUsernameEmail)
                     .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbUsernameEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfUsernameEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(tfPassword))
-                .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRegister)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnBack))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tfUsernameEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addComponent(tfPassword)
+                        .addComponent(cbBoxTypeOfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 146, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbUsernameEmail)
-                            .addComponent(tfUsernameEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addGap(54, 54, 54))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbUsernameEmail)
+                    .addComponent(tfUsernameEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPassword)
+                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbBoxTypeOfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister)
+                    .addComponent(btnLogin)
+                    .addComponent(btnBack))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,7 +183,12 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JComboBox<String> cbBoxTypeOfAccount;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbPassword;
     private javax.swing.JLabel lbUsernameEmail;
     private javax.swing.JPasswordField tfPassword;
@@ -189,4 +227,28 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
         setVisible(isVisible);
     }
 
+    public void setBackButtonActionListener(ActionListener listener) {
+        btnBack.addActionListener(listener);
+    }
+
+    @Override
+    public void setRegisterButtonActionListener(ActionListener listener) {
+        btnRegister.addActionListener(listener);
+    }
+
+    @Override
+    public void noticeError(String title, String message) {
+        JOptionPane.showMessageDialog(this,title, message, JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void noticeSuccessfully(String title, String message) {
+        JOptionPane.showMessageDialog(this,title, message, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public int getComboboxSelectedOnLoginForm() {
+        return cbBoxTypeOfAccount.getSelectedIndex();
+    }
+    
 }
