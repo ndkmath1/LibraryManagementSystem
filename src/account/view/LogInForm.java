@@ -227,6 +227,7 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
         setVisible(isVisible);
     }
 
+    @Override
     public void setBackButtonActionListener(ActionListener listener) {
         btnBack.addActionListener(listener);
     }
