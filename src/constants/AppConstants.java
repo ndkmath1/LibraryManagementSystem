@@ -13,7 +13,7 @@ public final class AppConstants {
 
     public static final String DB_USERNAME = "root";
     public static final String DB_PASSWORD = "123456";
-    public static final String DB_NAME = "library_management_system";
+    public static final String DB_NAME = "lms";
     public static final String SERVER_NAME = "localhost";
     public static final int PORT_NUMBER = 3306;
     public static final String DBMS = "mysql";

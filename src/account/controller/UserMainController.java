@@ -5,11 +5,12 @@ import account.view.IUserMainForm;
 import account.view.UserMainForm;
 
 public class UserMainController {
+
     private IUserMainForm userMainForm;
-    
-    public UserMainController(ILogInForm logInForm){
-        userMainForm=new UserMainForm();
+
+    public UserMainController(ILogInForm logInForm) {
+        userMainForm = new UserMainForm();
         userMainForm.openUserMainForm();
-        logInForm.closeForm();
+        logInForm.setVisibleForm(false);
     }
 }

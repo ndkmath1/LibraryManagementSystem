@@ -17,21 +17,21 @@ public interface ILogInForm {
     public void setLoginButtonActionListener(ActionListener listener);
 
     public String getUserNameEmailOnLoginForm();
-    
+
     public String getPasswordOnLoginForm();
-    
+
     public void setBackButtonActionListener(ActionListener listener);
-    
+
     public void setRegisterButtonActionListener(ActionListener listener);
-    
+
     public void closeForm();
-    
+
     public void setVisibleForm(boolean isVisible);
-    
+
     public void noticeError(String title, String message);
-    
+
     public void noticeSuccessfully(String title, String message);
-    
+
     public int getComboboxSelectedOnLoginForm();
 
 }

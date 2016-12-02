@@ -45,8 +45,6 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm{
         this.setVisible(false);
     }
 
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

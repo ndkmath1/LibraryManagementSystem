@@ -32,7 +32,8 @@ public class MainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new LogInController();
+            mainForm.setVisibleForm(false);
+            new LogInController(mainForm);
         }
     
     }

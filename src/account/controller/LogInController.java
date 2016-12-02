@@ -15,6 +15,7 @@ import admin.controller.AdminMainController;
 import admin.view.AdminMainForm;
 import constants.LoginConstants;
 import book.controller.LibrarianMainController;
+import main.view.IMainForm;
 import model.Account;
 import model.AccountManager;
 import utils.AccountHelper;
@@ -26,12 +27,15 @@ import utils.AccountHelper;
 public class LogInController {
 
     private ILogInForm loginForm;
+    private IMainForm mainForm;
     private IAccountSystem accountSystem = AccountSystemFactory.getAccountSystem();
 
-    public LogInController() {
+    public LogInController(IMainForm mainForm) {
+        this.mainForm = mainForm;
         loginForm = new LogInForm();
         loginForm.setVisibleForm(true);
         loginForm.setLoginButtonActionListener(new LogInButtonActionListener());
+        loginForm.setBackButtonActionListener(new BackButtonActionListener());
     }
 
     private class LogInButtonActionListener implements ActionListener {
@@ -70,6 +74,16 @@ public class LogInController {
             }
         }
 
+    }
+    
+    private class BackButtonActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            loginForm.closeForm();
+            mainForm.setVisibleForm(true);
+        }
+        
     }
 
 }
