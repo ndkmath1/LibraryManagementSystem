@@ -345,13 +345,13 @@ public class SignUpForm extends javax.swing.JFrame implements ISignUpForm{
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void openSingupForm() {
-        this.setVisible(true);
+    public void setVisibleForm(boolean isVisible) {
+        setVisible(isVisible);
     }
 
     @Override
-    public void closeSingupForm() {
-        this.setVisible(false);
+    public void closeForm() {
+        super.dispose();
     }
 
     @Override

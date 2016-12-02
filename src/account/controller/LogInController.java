@@ -36,6 +36,7 @@ public class LogInController {
         loginForm.setVisibleForm(true);
         loginForm.setLoginButtonActionListener(new LogInButtonActionListener());
         loginForm.setBackButtonActionListener(new BackButtonActionListener());
+        loginForm.setRegisterButtonActionListener(new RegisterButtonActionListener());
     }
 
     private class LogInButtonActionListener implements ActionListener {
@@ -82,6 +83,15 @@ public class LogInController {
         public void actionPerformed(ActionEvent e) {
             loginForm.closeForm();
             mainForm.setVisibleForm(true);
+        }
+        
+    }
+    
+    private class RegisterButtonActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new SignUpController(loginForm);
         }
         
     }
