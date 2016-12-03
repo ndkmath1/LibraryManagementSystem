@@ -39,11 +39,9 @@ public class AccountHelper {
     }
 
     public static boolean validateEmail(String email) {
-<<<<<<< HEAD
         if(email.length()<6 || email.length()>30) return false;
         if(!email.contains("@")) return false;
         if(!email.contains(".")) return false;
-=======
         if (email.length() < 6 || email.length() > 20) {
             return false;
         }
@@ -53,7 +51,6 @@ public class AccountHelper {
         if (!email.contains(".")) {
             return false;
         }
->>>>>>> dde3cda02282b3b24c686290af38577dffe56e60
         Pattern p = Pattern.compile(EMAIL_CHARACTER, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(email);
         boolean check = m.find();

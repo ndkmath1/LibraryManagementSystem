@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/account/controller/SignUpController.java</file>
-            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/utils/UserInfoHelper.java</file>
             <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/account/system/AccountSystem.java</file>
-            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/account/interfaces/IAccountSystem.java</file>
             <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/databasehelper/ConnectDatabase.java</file>
             <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/databasehelper/AccountSQLStatement.java</file>
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/constants/AppConstants.java</file>
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/account/view/SignUpForm.java</file>
             <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/utils/AccountHelper.java</file>
-            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/account/controller/LogInController.java</file>
-=======
-            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/controller/IssuedBorrowerCardController.java</file>
->>>>>>> dde3cda02282b3b24c686290af38577dffe56e60
         </group>
     </open-files>
 </project-private>
