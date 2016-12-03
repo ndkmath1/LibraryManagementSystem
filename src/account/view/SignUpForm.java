@@ -463,7 +463,7 @@ public class SignUpForm extends javax.swing.JFrame implements ISignUpForm{
         lbBirthday.setEnabled(true);
         lbGender.setEnabled(true);
         lbNationalID.setEnabled(true);
-    
+        tfNationalID.setEnabled(true);
     }
 
     @Override
@@ -484,7 +484,8 @@ public class SignUpForm extends javax.swing.JFrame implements ISignUpForm{
         lbAddress.setEnabled(false);
         lbBirthday.setEnabled(false);
         lbGender.setEnabled(false);
-         lbNationalID.setEnabled(false);
+        lbNationalID.setEnabled(false);
+        tfNationalID.setEnabled(false);
     }
 
     @Override
@@ -499,16 +500,80 @@ public class SignUpForm extends javax.swing.JFrame implements ISignUpForm{
     
     @Override
     public void noticeError(String title, String message) {
-        JOptionPane.showMessageDialog(this,message, title, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this,title, message, JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
     public void noticeSuccessfully(String title, String message) {
-        JOptionPane.showMessageDialog(this,message, title, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,title, message, JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public String getNationalOnSignupForm() {
         return tfNationalID.getText();
     }
+
+    @Override
+    public void setTextFieldStudentIDNumberKeyAction(KeyListener keyListener) {
+        tfStudentID.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldUsernameKeyAction(KeyListener keyListener) {
+        tfUsername.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldPasswordKeyAction(KeyListener keyListener) {
+        tfPassword.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldNameKeyAction(KeyListener keyListener) {
+        tfName.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldPhoneNumberKeyAction(KeyListener keyListener) {
+        tfPhoneNumber.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldEmailKeyAction(KeyListener keyListener) {
+        tfEmail.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldNationalIDNumberKeyAction(KeyListener keyListener) {
+        tfNationalID.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldAddressKeyAction(KeyListener keyListener) {
+        tfAddress.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void moveCursorToTextFieldNationalID() {
+        tfNationalID.requestFocusInWindow();
+    }
+
+    @Override
+    public void doClickButtonRegisterAction() {
+        btnRegister.doClick();
+    }
+
+    @Override
+    public void refreshAllField() {
+        tfStudentID.setText("");
+        tfUsername.setText("");
+        tfPassword.setText("");
+        tfName.setText("");
+        tfPhoneNumber.setText("");
+        tfEmail.setText("");
+        tfNationalID.setText("");
+        tfAddress.setText("");
+        rbtnMale.setSelected(true);
+    }
+    
 }

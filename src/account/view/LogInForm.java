@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package account.view;
 
 import constants.LoginConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Khanh Nguyen
- */
 public class LogInForm extends javax.swing.JFrame implements ILogInForm {
    
     /**
@@ -215,6 +207,21 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
     @Override
     public int getComboboxSelectedOnLoginForm() {
         return cbBoxTypeOfAccount.getSelectedIndex();
+    }
+
+    @Override
+    public void setTextFieldUserNameKeyAction(KeyListener keyListener) {
+        tfUsernameEmail.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void setTextFieldPassWordKeyAction(KeyListener keyListener) {
+        tfPassword.addKeyListener(keyListener);
+    }
+
+    @Override
+    public void doClickButtonLogin() {
+        btnLogin.doClick();
     }
     
 }

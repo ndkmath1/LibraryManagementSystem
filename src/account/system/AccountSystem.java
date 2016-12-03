@@ -18,10 +18,7 @@ public class AccountSystem implements IAccountSystem {
     @Override
     public Account checkLogin(String username, String password) {
         try {
-            System.out.println("1111111111111111111");
-            System.out.println("db: " + ConnectDatabase.getConnection());
-            PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_GET_ACCOUNT_FROM_USERNAME_OR_EMAIL);
-            
+            PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_GET_ACCOUNT_FROM_USERNAME_OR_EMAIL);            
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, password);
@@ -51,7 +48,7 @@ public class AccountSystem implements IAccountSystem {
                 AccountManager accountManager=new AccountManager();
                 accountManager.setUsername(username);
                 accountManager.setPassword(password);
-                accountManager.setTypeManager(result.getBoolean(4));
+                accountManager.setTypeManager(result.getBoolean(9));
                 return accountManager;
             }
             else return null;
@@ -71,18 +68,16 @@ public class AccountSystem implements IAccountSystem {
             preparedStatement.setString(4, user.getPhoneNumber());
             preparedStatement.setDate(5, new java.sql.Date(user.getBirthDay().getTime()));
             preparedStatement.setString(6, user.getNationalID());
-           
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("ex account5= "+ex);
         }
         
-         try {
+        try {
             PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_REGISTER_NEW_ACCOUNT);
             preparedStatement.setString(1, account.getUsername());
             preparedStatement.setString(2, account.getEmail());
             preparedStatement.setString(3, account.getPassword());
-            System.out.println("sxxx1="+preparedStatement.toString());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("ex account5= "+ex);
@@ -123,11 +118,8 @@ public class AccountSystem implements IAccountSystem {
         StudentID studentID=new StudentID(studentIDNumber);
         try {
             PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_CHECK_STUDENTID_EXISTED);
-            preparedStatement.setInt(1, studentID.getYear());
-            System.out.println("1= "+studentID.getYear());
+            preparedStatement.setInt(1, studentID.getYear());         
             preparedStatement.setInt(2, studentID.getOrder());
-            System.out.println("2= "+studentID.getOrder());
-            System.out.println("pre= "+preparedStatement.toString());
             ResultSet result= preparedStatement.executeQuery();
             if(result.next()) return result.getInt(1);
             else return 0;
@@ -144,7 +136,6 @@ public class AccountSystem implements IAccountSystem {
             PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_CHECK_STUDENT_HAS_ACCOUNT);
             preparedStatement.setInt(1, studentID.getYear());
             preparedStatement.setInt(2, studentID.getOrder());
-            System.out.println("sxxx="+preparedStatement.toString());
             ResultSet result= preparedStatement.executeQuery();
             if(result.next()) return true;
             else return false;
@@ -153,6 +144,5 @@ public class AccountSystem implements IAccountSystem {
         }
         return false;
     }
-    
     
 }

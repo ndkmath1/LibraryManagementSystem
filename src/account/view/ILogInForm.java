@@ -6,6 +6,7 @@
 package account.view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 /**
  * The ILogInForm list methods for LoginForm
@@ -33,5 +34,11 @@ public interface ILogInForm {
     public void noticeSuccessfully(String title, String message);
 
     public int getComboboxSelectedOnLoginForm();
+    
+    public void setTextFieldUserNameKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldPassWordKeyAction(KeyListener keyListener);
+    
+    public void doClickButtonLogin();
 
 }

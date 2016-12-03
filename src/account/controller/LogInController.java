@@ -10,6 +10,9 @@ import admin.controller.AdminMainController;
 import admin.view.AdminMainForm;
 import constants.LoginConstants;
 import book.controller.LibrarianMainController;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
 import main.view.IMainForm;
 import model.Account;
 import model.AccountManager;
@@ -28,6 +31,8 @@ public class LogInController {
         loginForm.setLoginButtonActionListener(new LogInButtonActionListener());
         loginForm.setBackButtonActionListener(new BackButtonActionListener());
         loginForm.setRegisterButtonActionListener(new RegisterButtonActionListener());
+        loginForm.setTextFieldUserNameKeyAction(new TextFieldUsernameKeyListener());
+        loginForm.setTextFieldPassWordKeyAction(new TextFieldPasswordKeyListener());
     }
 
     private class LogInButtonActionListener implements ActionListener {
@@ -44,14 +49,14 @@ public class LogInController {
                 return;
             }
             if (loginForm.getComboboxSelectedOnLoginForm() == 0) {
-                Account account = accountSystem.checkLogin(username, password);
+                Account account = accountSystem.checkLogin(username, AccountHelper.getMD5encrypt(password));
                 if (account == null) {
                     loginForm.noticeError(LoginConstants.ERROR_ACCOUNT_NOT_FOUND_TITLE, LoginConstants.ERROR_ACCONT_NOT_FOUND);
                 } else {
                     new UserMainController(loginForm);
                 }
             } else {
-                AccountManager accountManager = accountSystem.checkManageLogin(username, password);
+                AccountManager accountManager = accountSystem.checkManageLogin(username, AccountHelper.getMD5encrypt(password));
                 if (accountManager == null) {
                     loginForm.noticeError(LoginConstants.ERROR_ACCOUNT_NOT_FOUND_TITLE, LoginConstants.ERROR_ACCONT_NOT_FOUND);
                 } else if (!accountManager.getTypeManager()) {
@@ -81,6 +86,31 @@ public class LogInController {
             new SignUpController(loginForm);
         }
 
+    }
+    
+    private class TextFieldUsernameKeyListener extends KeyAdapter{
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                JComponent component = (JComponent)e.getSource();
+                component.transferFocus();
+            } 
+        }
+        
+    }
+    
+     private class TextFieldPasswordKeyListener extends KeyAdapter{
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                JComponent component = (JComponent)e.getSource();
+                component.transferFocus();
+                loginForm.doClickButtonLogin();
+            } 
+        }
+        
     }
 
 }

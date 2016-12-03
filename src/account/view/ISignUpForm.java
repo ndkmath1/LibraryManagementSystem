@@ -54,5 +54,25 @@ public interface ISignUpForm {
     
     public void noticeSuccessfully(String title, String message);
     
+    public void setTextFieldStudentIDNumberKeyAction(KeyListener keyListener);
     
+    public void setTextFieldUsernameKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldPasswordKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldNameKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldPhoneNumberKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldEmailKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldNationalIDNumberKeyAction(KeyListener keyListener);
+    
+    public void setTextFieldAddressKeyAction(KeyListener keyListener);
+    
+    public void moveCursorToTextFieldNationalID();
+    
+    public void doClickButtonRegisterAction();
+    
+    public void refreshAllField();
 }

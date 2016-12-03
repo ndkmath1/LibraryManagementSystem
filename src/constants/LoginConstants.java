@@ -10,7 +10,6 @@ package constants;
  * @author Khanh Nguyen
  */
 public class LoginConstants {
-
     public static final String TITLE_FORM = "Đăng nhập";
     public static final String BTN_LOGIN = "Đăng nhập";
     public static final String LB_USERNAME_EMAIL = "Tên đăng nhập hoặc Email";
