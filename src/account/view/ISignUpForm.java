@@ -23,6 +23,8 @@ public interface ISignUpForm {
     public String getEmailOnSingupForm();
 
     public String getPhoneOnSingupForm();
+    
+    public String getNationalOnSignupForm();
 
     public boolean getGenderOnSingupForm();
 
@@ -38,5 +40,19 @@ public interface ISignUpForm {
 
     public void setButtonBackActionListener(ActionListener listener);
 
+    public void setRadioButtonNormalActionListener(ActionListener listener);
+    
+    public void setRadioButtonStudentActionListener(ActionListener listener);
+    
     public Date getComboboxBirthdayonSignForm();
+    
+    public void hideStudentInfoFields();
+    
+    public void showStudentInfoFriends();
+    
+    public void noticeError(String title, String message);
+    
+    public void noticeSuccessfully(String title, String message);
+    
+    
 }

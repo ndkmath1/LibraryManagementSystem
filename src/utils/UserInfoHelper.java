@@ -34,4 +34,22 @@ public class UserInfoHelper {
         if(check) return false;
         return true;
     }
+    
+    public static boolean validateNationalID(String nationalID){
+        if(nationalID.length()<9 || nationalID.length() >12) return false;
+        Pattern p = Pattern.compile(PHONE_CHARACTER, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(nationalID);
+        boolean check = m.find();
+        if(check) return false;
+        return true;
+    }
+    
+    public static boolean validateStudentID(String studentID){
+        if(studentID.length()!=8) return false;
+        Pattern p = Pattern.compile(PHONE_CHARACTER, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(studentID);
+        boolean check = m.find();
+        if(check) return false;
+        return true;
+    }
 }

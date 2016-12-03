@@ -34,7 +34,7 @@ public class AccountHelper {
     }
     
     public static boolean validateEmail(String email) {
-        if(email.length()<6 || email.length()>20) return false;
+        if(email.length()<6 || email.length()>30) return false;
         if(!email.contains("@")) return false;
         if(!email.contains(".")) return false;
         Pattern p = Pattern.compile(EMAIL_CHARACTER, Pattern.CASE_INSENSITIVE);

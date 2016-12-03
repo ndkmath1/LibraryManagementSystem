@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- * The Account class contain information of a account
- * @author Khanh Nguyen
- */
+
 public class Account {
     
     private String username;
     private String email;
     private String password;
+    private boolean status;
+    private int accounrID;
+    private int userID;
     
     public Account () {}
     
@@ -21,6 +16,9 @@ public class Account {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.status=false;
+        this.accounrID=0;
+        this.userID=0;
     }
     
     public String getUsername() {
@@ -46,5 +44,31 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public int getAccounrID() {
+        return accounrID;
+    }
+
+    public void setAccounrID(int accounrID) {
+        this.accounrID = accounrID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+    
+    
     
 }

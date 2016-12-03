@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package account.controller;
 
 import account.factory.AccountSystemFactory;
@@ -20,10 +15,6 @@ import model.Account;
 import model.AccountManager;
 import utils.AccountHelper;
 
-/**
- *
- * @author Khanh Nguyen
- */
 public class LogInController {
 
     private ILogInForm loginForm;
@@ -40,14 +31,10 @@ public class LogInController {
     }
 
     private class LogInButtonActionListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             String username = loginForm.getUserNameEmailOnLoginForm();
-            if (!AccountHelper.validateUsername(username)) {
-                loginForm.noticeError(LoginConstants.ERROR_FORMAT_TITLE, LoginConstants.ERROR_USERNAME_MESSAGE);
-                return;
-            } else if (!AccountHelper.validateEmail(username)) {
+            if ((!AccountHelper.validateEmail(username))&&(!AccountHelper.validateUsername(username))) {
                 loginForm.noticeError(LoginConstants.ERROR_FORMAT_TITLE, LoginConstants.ERROR_EMAIL_MESSAGE);
                 return;
             }
