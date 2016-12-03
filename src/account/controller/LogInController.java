@@ -16,7 +16,7 @@ import model.AccountManager;
 import utils.AccountHelper;
 
 public class LogInController {
-
+    
     private ILogInForm loginForm;
     private IMainForm mainForm;
     private IAccountSystem accountSystem = AccountSystemFactory.getAccountSystem();
@@ -63,7 +63,7 @@ public class LogInController {
         }
 
     }
-    
+
     private class BackButtonActionListener implements ActionListener {
 
         @Override
@@ -71,16 +71,16 @@ public class LogInController {
             loginForm.closeForm();
             mainForm.setVisibleForm(true);
         }
-        
+
     }
-    
+
     private class RegisterButtonActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             new SignUpController(loginForm);
         }
-        
+
     }
 
 }

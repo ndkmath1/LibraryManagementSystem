@@ -16,8 +16,9 @@ import model.User;
  * @author Khanh Nguyen
  */
 public interface IAccountSystem {
+
     public Account checkLogin(String email, String password);
-    
+
     public AccountManager checkManageLogin(String username, String password);
     
     public void saveNewAccount(Account account, User user);
@@ -30,4 +31,5 @@ public interface IAccountSystem {
     
     public boolean isStudentHasAccount(String studentIDNumber);
     
+
 }
