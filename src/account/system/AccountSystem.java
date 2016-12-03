@@ -19,7 +19,7 @@ public class AccountSystem implements IAccountSystem {
     public Account checkLogin(String username, String password) {
         try {
             System.out.println("1111111111111111111");
-            System.out.println("db: " + ConnectDatabase.getConnection().getSchema());
+            System.out.println("db: " + ConnectDatabase.getConnection());
             PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_GET_ACCOUNT_FROM_USERNAME_OR_EMAIL);
             
             preparedStatement.setString(1, username);

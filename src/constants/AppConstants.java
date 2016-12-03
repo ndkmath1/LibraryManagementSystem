@@ -23,12 +23,4 @@ public final class AppConstants {
     public static final int PORT_NUMBER = 3306;
     public static final String DBMS = "mysql";
     public static final String URL_CONNECTION = "jdbc:" + DBMS + "://" + SERVER_NAME + ":" + PORT_NUMBER + "/" + DB_NAME;
-
-    public static void main(String[] args) {
-        try {
-            ConnectDatabase.getConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(AppConstants.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
