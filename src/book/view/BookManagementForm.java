@@ -1,8 +1,11 @@
 package book.view;
 
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -16,16 +19,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-/**
- * Form quản lý sách
- * @author HUYNH
- */
-public class BookManagementForm extends javax.swing.JFrame {
+public class BookManagementForm extends javax.swing.JFrame implements IBookManagementForm{
      
     
     public BookManagementForm() {
         initComponents();
-       
+        tbShowListBook.setFillsViewportHeight(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,18 +44,14 @@ public class BookManagementForm extends javax.swing.JFrame {
         tabManageBook = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        tfSeachByID = new javax.swing.JTextField();
-        rbtnSeachByID = new javax.swing.JRadioButton();
-        rbtnSeachByName = new javax.swing.JRadioButton();
-        tfSearchByName = new javax.swing.JTextField();
-        rbtnSearchByPublisher = new javax.swing.JRadioButton();
-        rbtnSeachByAuthor = new javax.swing.JRadioButton();
-        tfSearchByPublisher = new javax.swing.JTextField();
-        tfSearchbyAuthor = new javax.swing.JTextField();
+        tfDataSearch = new javax.swing.JTextField();
         btnSearchBook = new javax.swing.JButton();
         scrollPaneContentBooks = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbShowListBook = new javax.swing.JTable();
+        cbBoxTypeOfSearchBook = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         panelShowBookInfo = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -77,13 +72,13 @@ public class BookManagementForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnSave = new javax.swing.JButton();
+        btnSaveNewBook = new javax.swing.JButton();
         tfPublisher = new javax.swing.JTextField();
         tfAuthor = new javax.swing.JTextField();
         tfISBN = new javax.swing.JTextField();
-        btnCancel = new javax.swing.JButton();
+        btnCancelSaveNewBook = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        cbClassificationBook = new javax.swing.JComboBox<>();
+        cbCategoryBook = new javax.swing.JComboBox<>();
         jPanel10 = new javax.swing.JPanel();
         tfBookNumber = new javax.swing.JTextField();
         lbBookNumber = new javax.swing.JLabel();
@@ -98,8 +93,8 @@ public class BookManagementForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         cbBoxTypeOfCopy = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        btnAddNewCopyBook = new javax.swing.JButton();
-        btnCancelAddCopyBook = new javax.swing.JButton();
+        btnSaveNewCopyBook = new javax.swing.JButton();
+        btnRefreshCopyBook = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         btnShowBookNumber = new javax.swing.JButton();
@@ -137,47 +132,10 @@ public class BookManagementForm extends javax.swing.JFrame {
 
         tabManageBook.setBackground(new java.awt.Color(255, 255, 51));
 
-        rbtnSeachByID.setSelected(true);
-        rbtnSeachByID.setText("Theo mã sách:");
-        rbtnSeachByID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnSeachByIDActionPerformed(evt);
-            }
-        });
-
-        rbtnSeachByName.setText("Theo tên:");
-        rbtnSeachByName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnSeachByNameActionPerformed(evt);
-            }
-        });
-
-        tfSearchByName.setEnabled(false);
-
-        rbtnSearchByPublisher.setText("Theo NXB:");
-        rbtnSearchByPublisher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnSearchByPublisherActionPerformed(evt);
-            }
-        });
-
-        rbtnSeachByAuthor.setText("Theo tác giả:");
-        rbtnSeachByAuthor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnSeachByAuthorActionPerformed(evt);
-            }
-        });
-
-        tfSearchByPublisher.setEnabled(false);
-        tfSearchByPublisher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSearchByPublisherActionPerformed(evt);
-            }
-        });
-
-        tfSearchbyAuthor.setEnabled(false);
-
-        btnSearchBook.setText("Tìm kiếm sách");
+        btnSearchBook.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnSearchBook.setForeground(new java.awt.Color(0, 51, 255));
+        btnSearchBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_search.png"))); // NOI18N
+        btnSearchBook.setText("Tìm kiếm");
         btnSearchBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchBookActionPerformed(evt);
@@ -207,77 +165,69 @@ public class BookManagementForm extends javax.swing.JFrame {
 
         scrollPaneContentBooks.setViewportView(jScrollPane1);
 
+        cbBoxTypeOfSearchBook.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        cbBoxTypeOfSearchBook.setForeground(new java.awt.Color(0, 51, 255));
+        cbBoxTypeOfSearchBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã sách", "Tên", "Tác giả", "Nhà xuất bản" }));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel7.setText("Tìm kiếm theo");
+
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel22.setText("Tìm kiếm sách");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrollPaneContentBooks, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(tfSeachByID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(rbtnSeachByName)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbtnSeachByAuthor)
-                                            .addComponent(rbtnSearchByPublisher))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfSearchbyAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                            .addComponent(tfSearchByPublisher)))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(rbtnSeachByID)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
-                .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(btnSearchBook)
+                .addGap(209, 209, 209)
+                .addComponent(jLabel22)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfDataSearch)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbBoxTypeOfSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearchBook)
+                .addContainerGap())
+            .addComponent(scrollPaneContentBooks, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addGap(54, 54, 54)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfSeachByID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbtnSeachByID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtnSeachByName)
-                    .addComponent(tfSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rbtnSearchByPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfSearchByPublisher))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbtnSeachByAuthor)
-                    .addComponent(tfSearchbyAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(btnSearchBook)
+                    .addComponent(cbBoxTypeOfSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(scrollPaneContentBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfDataSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchBook))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollPaneContentBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
+        jLabel26.setForeground(new java.awt.Color(0, 102, 255));
         jLabel26.setText("Mã sách:");
 
+        jLabel28.setForeground(new java.awt.Color(0, 102, 255));
         jLabel28.setText("Tên sách:");
 
+        jLabel30.setForeground(new java.awt.Color(0, 102, 255));
         jLabel30.setText("Tác giả:");
 
+        jLabel32.setForeground(new java.awt.Color(0, 102, 255));
         jLabel32.setText("NXB:");
 
+        jLabel34.setForeground(new java.awt.Color(0, 102, 255));
         jLabel34.setText("IBNS:");
 
         tbShowBookCopyInfo.setModel(new javax.swing.table.DefaultTableModel(
@@ -313,7 +263,6 @@ public class BookManagementForm extends javax.swing.JFrame {
         panelShowBookInfo.setLayout(panelShowBookInfoLayout);
         panelShowBookInfoLayout.setHorizontalGroup(
             panelShowBookInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jscrollpane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(panelShowBookInfoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelShowBookInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -334,6 +283,7 @@ public class BookManagementForm extends javax.swing.JFrame {
                     .addComponent(tfShowBookAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfShowBookPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(96, Short.MAX_VALUE))
+            .addComponent(jscrollpane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelShowBookInfoLayout.setVerticalGroup(
             panelShowBookInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,9 +309,11 @@ public class BookManagementForm extends javax.swing.JFrame {
                     .addComponent(jLabel34)
                     .addComponent(tfShowBookIBNS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jscrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jscrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
         );
 
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 204));
         jLabel13.setText("Thông tin sách");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -370,7 +322,7 @@ public class BookManagementForm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -381,13 +333,13 @@ public class BookManagementForm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelShowBookInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(panelShowBookInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         tabManageBook.addTab("Tìm kiếm sách", jPanel2);
@@ -406,18 +358,20 @@ public class BookManagementForm extends javax.swing.JFrame {
 
         jLabel6.setText("Tác giả:");
 
-        btnSave.setText("Lưu");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveNewBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_save.png"))); // NOI18N
+        btnSaveNewBook.setText("Lưu");
+        btnSaveNewBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnSaveNewBookActionPerformed(evt);
             }
         });
 
-        btnCancel.setText("Hủy");
+        btnCancelSaveNewBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_refresh.png"))); // NOI18N
+        btnCancelSaveNewBook.setText("Làm mới");
 
         jLabel25.setText("Thể loại:");
 
-        cbClassificationBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCategoryBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Nhập mã sách"));
 
@@ -447,11 +401,11 @@ public class BookManagementForm extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(checkboxSelectTypeEnter)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(291, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(lbBookNumber)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(tfBookNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfBookNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +429,7 @@ public class BookManagementForm extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbClassificationBook, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbCategoryBook, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -492,18 +446,18 @@ public class BookManagementForm extends javax.swing.JFrame {
                                         .addComponent(tfPublisher)
                                         .addComponent(tfAuthor))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(btnSave)
-                        .addGap(124, 124, 124)
-                        .addComponent(btnCancel)))
-                .addContainerGap(372, Short.MAX_VALUE))
+                        .addGap(208, 208, 208)
+                        .addComponent(btnSaveNewBook, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnCancelSaveNewBook)))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbClassificationBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCategoryBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -523,11 +477,11 @@ public class BookManagementForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnCancel))
-                .addContainerGap(139, Short.MAX_VALUE))
+                    .addComponent(btnSaveNewBook, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelSaveNewBook, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         tabManageBook.addTab("Thêm sách mới", jPanel1);
@@ -550,14 +504,16 @@ public class BookManagementForm extends javax.swing.JFrame {
 
         jLabel12.setText("(VNĐ)");
 
-        btnAddNewCopyBook.setText("Thêm");
-        btnAddNewCopyBook.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveNewCopyBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_save.png"))); // NOI18N
+        btnSaveNewCopyBook.setText("Thêm");
+        btnSaveNewCopyBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddNewCopyBookActionPerformed(evt);
+                btnSaveNewCopyBookActionPerformed(evt);
             }
         });
 
-        btnCancelAddCopyBook.setText("Hủy");
+        btnRefreshCopyBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_refresh.png"))); // NOI18N
+        btnRefreshCopyBook.setText("Làm mới");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -583,11 +539,11 @@ public class BookManagementForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(btnAddNewCopyBook)
-                        .addGap(93, 93, 93)
-                        .addComponent(btnCancelAddCopyBook)))
-                .addContainerGap(421, Short.MAX_VALUE))
+                        .addGap(167, 167, 167)
+                        .addComponent(btnSaveNewCopyBook, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96)
+                        .addComponent(btnRefreshCopyBook)))
+                .addContainerGap(440, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,9 +567,9 @@ public class BookManagementForm extends javax.swing.JFrame {
                     .addComponent(cbBoxTypeOfCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddNewCopyBook)
-                    .addComponent(btnCancelAddCopyBook))
-                .addContainerGap(241, Short.MAX_VALUE))
+                    .addComponent(btnSaveNewCopyBook)
+                    .addComponent(btnRefreshCopyBook))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         tabManageBook.addTab("Thêm sách bản sao", jPanel4);
@@ -701,7 +657,7 @@ public class BookManagementForm extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChangeBookInfo)
                     .addComponent(btnCancelEditBookInfo))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -835,7 +791,7 @@ public class BookManagementForm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -896,10 +852,6 @@ public class BookManagementForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBookCopyPrinceActionPerformed
 
-    private void tfSearchByPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchByPublisherActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSearchByPublisherActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         
     }//GEN-LAST:event_btnBackActionPerformed
@@ -921,25 +873,9 @@ public class BookManagementForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkboxSelectTypeEnterActionPerformed
     
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnSaveNewBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveNewBookActionPerformed
         
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void rbtnSeachByIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSeachByIDActionPerformed
-      
-    }//GEN-LAST:event_rbtnSeachByIDActionPerformed
-
-    private void rbtnSeachByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSeachByNameActionPerformed
-       
-    }//GEN-LAST:event_rbtnSeachByNameActionPerformed
-
-    private void rbtnSearchByPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSearchByPublisherActionPerformed
-      
-    }//GEN-LAST:event_rbtnSearchByPublisherActionPerformed
-
-    private void rbtnSeachByAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSeachByAuthorActionPerformed
-       
-    }//GEN-LAST:event_rbtnSeachByAuthorActionPerformed
+    }//GEN-LAST:event_btnSaveNewBookActionPerformed
 
     private void btnSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchBookActionPerformed
        
@@ -954,9 +890,9 @@ public class BookManagementForm extends javax.swing.JFrame {
       
     }//GEN-LAST:event_tfShowBookNumberKeyPressed
 
-    private void btnAddNewCopyBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewCopyBookActionPerformed
+    private void btnSaveNewCopyBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveNewCopyBookActionPerformed
        
-    }//GEN-LAST:event_btnAddNewCopyBookActionPerformed
+    }//GEN-LAST:event_btnSaveNewCopyBookActionPerformed
 
     private void tbShowListBookMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbShowListBookMouseReleased
 
@@ -983,15 +919,15 @@ public class BookManagementForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChangeBookCopyInfoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddNewCopyBook;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnCancelAddCopyBook;
     private javax.swing.JButton btnCancelEditBookCOpy;
     private javax.swing.JButton btnCancelEditBookInfo;
+    private javax.swing.JButton btnCancelSaveNewBook;
     private javax.swing.JButton btnChangeBookCopyInfo;
     private javax.swing.JButton btnChangeBookInfo;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnRefreshCopyBook;
+    private javax.swing.JButton btnSaveNewBook;
+    private javax.swing.JButton btnSaveNewCopyBook;
     private javax.swing.JButton btnSearchBook;
     private javax.swing.JButton btnShowBookCopyInfo;
     private javax.swing.JButton btnShowBookNumber;
@@ -1002,7 +938,8 @@ public class BookManagementForm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JComboBox<String> cbBoxTypeOfCopy;
-    private javax.swing.JComboBox<String> cbClassificationBook;
+    private javax.swing.JComboBox<String> cbBoxTypeOfSearchBook;
+    private javax.swing.JComboBox<String> cbCategoryBook;
     private javax.swing.JComboBox<String> cbEditTypeOfCopyEdit;
     private javax.swing.JCheckBox checkboxSelectTypeEnter;
     private javax.swing.JLabel jLabel1;
@@ -1019,6 +956,7 @@ public class BookManagementForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1031,6 +969,7 @@ public class BookManagementForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1046,10 +985,6 @@ public class BookManagementForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jscrollpane;
     private javax.swing.JLabel lbBookNumber;
     private javax.swing.JPanel panelShowBookInfo;
-    private javax.swing.JRadioButton rbtnSeachByAuthor;
-    private javax.swing.JRadioButton rbtnSeachByID;
-    private javax.swing.JRadioButton rbtnSeachByName;
-    private javax.swing.JRadioButton rbtnSearchByPublisher;
     private javax.swing.JScrollPane scrollPaneContentBooks;
     private javax.swing.JTabbedPane tabManageBook;
     private javax.swing.JTable tbShowBookCopyInfo;
@@ -1060,6 +995,7 @@ public class BookManagementForm extends javax.swing.JFrame {
     private javax.swing.JTextField tfBookNumber;
     private javax.swing.JTextField tfBookNumberOfNewBookCopy;
     private javax.swing.JTextField tfBookTitle;
+    private javax.swing.JTextField tfDataSearch;
     private javax.swing.JTextField tfEditBookAuthor;
     private javax.swing.JTextField tfEditBookIBNS;
     private javax.swing.JTextField tfEditBookName;
@@ -1069,14 +1005,242 @@ public class BookManagementForm extends javax.swing.JFrame {
     private javax.swing.JTextField tfNumOfCopyBook;
     private javax.swing.JTextField tfPrinceOfBookCopyEdit;
     private javax.swing.JTextField tfPublisher;
-    private javax.swing.JTextField tfSeachByID;
-    private javax.swing.JTextField tfSearchByName;
-    private javax.swing.JTextField tfSearchByPublisher;
-    private javax.swing.JTextField tfSearchbyAuthor;
     private javax.swing.JTextField tfShowBookAuthor;
     private javax.swing.JTextField tfShowBookIBNS;
     private javax.swing.JTextField tfShowBookName;
     private javax.swing.JTextField tfShowBookNumber;
     private javax.swing.JTextField tfShowBookPublisher;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void openBookManageForm() {
+        this.setVisible(true);
+    }
+
+    @Override
+    public void hideBookManagementForm() {
+        this.setVisible(false);
+    }
+
+    @Override
+    public void setButtonBackAction(ActionListener listener) {
+        btnBack.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonSaveNewBookAction(ActionListener listener) {
+        btnSaveNewBook.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonCansaveNewBookAction(ActionListener listener) {
+        btnCancelSaveNewBook.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonSearchBookAction(ActionListener listener) {
+        btnSearchBook.addActionListener(listener);
+    }
+
+    @Override
+    public void setTextFieldSearchBookKeyAction(KeyListener listener) {
+        tfDataSearch.addKeyListener(listener);
+    }
+
+    @Override
+    public void setCheckBoxTypeEnterBookActionListener(ActionListener listener) {
+        checkboxSelectTypeEnter.addActionListener(listener);
+    }
+
+    @Override
+    public void enableEnterBookNumber() {
+        lbBookNumber.setEnabled(true);
+        tfBookNumber.setEnabled(true);
+    }
+    
+    @Override
+    public void disableEnterBookNumber() {
+        lbBookNumber.setEnabled(false);
+        tfBookNumber.setEnabled(false);
+    }
+    
+    @Override
+    public boolean getCheckBoxSelectTypeEnter(){
+        return checkboxSelectTypeEnter.isSelected();
+    }
+
+    @Override
+    public String getTextFieldBookNumberOnSaveBook() {
+        return tfBookNumber.getText();
+    }
+
+    @Override
+    public String getTextFieldBookTitleOnSaveBook() {
+        return tfBookTitle.getText();
+    }
+
+    @Override
+    public String getTextFieldBookAuthorOnSaveBook() {
+        return tfAuthor.getText();
+    }
+
+    @Override
+    public String getTextFieldBookPublisherOnSaveBook() {
+        return tfPublisher.getText();
+    }
+
+    @Override
+    public String getTextFieldBookIBNSOnSaveBook() {
+        return tfISBN.getText();
+    }
+    
+    @Override
+    public void showListCategoryBook(MyComboboxModel data){
+        cbCategoryBook.setModel(data);
+        cbCategoryBook.setSelectedIndex(0);
+    }
+
+    @Override
+    public int getComboBoxCategoryBookOnSaveBook() {
+        return cbCategoryBook.getSelectedIndex();
+    }
+
+    @Override
+    public void noticeError(String title, String message) {
+        JOptionPane.showMessageDialog(this,message, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void noticeSuccessfully(String title, String message) {
+        JOptionPane.showMessageDialog(this,message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void setButonSaveNewBookCopyActionListener(ActionListener listener) {
+        btnSaveNewCopyBook.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonRefreshSaveBookCopyActionListener(ActionListener listener) {
+        btnRefreshCopyBook.addActionListener(listener);
+    }
+
+    @Override
+    public String getTextFieldBookNumberOfNewBookCopy() {
+        return tfBookNumberOfNewBookCopy.getText();
+    }
+
+    @Override
+    public String getTextFieldNumOfCopyBook() {
+        return tfNumOfCopyBook.getText();
+    }
+
+    @Override
+    public String getTextFieldBookCopyPrince() {
+        return tfBookCopyPrince.getText();
+    }
+
+    @Override
+    public int getComboBoxBoxTypeOfCopy() {
+        return cbBoxTypeOfCopy.getSelectedIndex();
+    }
+
+    @Override
+    public int getComboBoxTypeOfSearchBook() {
+        return cbBoxTypeOfSearchBook.getSelectedIndex();
+    }
+
+    @Override
+    public String getTextFieldDataSearch() {
+        return tfDataSearch.getText();
+    }
+
+    @Override
+    public void displayBookResult(BookTableModel bookTableModel) {
+        tbShowListBook.setModel(bookTableModel);
+    }
+
+    @Override
+    public void setTextFieldDataSearchKeyAction(KeyListener listener) {
+        tfDataSearch.addKeyListener(listener);
+    }
+
+    @Override
+    public void doClickButtonSearchBook() {
+        btnSearchBook.doClick();
+    }
+
+    @Override
+    public void setTableShowBookResultMouseAction(MouseListener listener) {
+        tbShowListBook.addMouseListener(listener);
+    }
+
+    @Override
+    public void setTextFieldShowBookNumber(String bookNumber) {
+        tfShowBookNumber.setText(bookNumber);
+    }
+
+    @Override
+    public void setTextFieldShowBookName(String bookNumber) {
+        tfShowBookName.setText(bookNumber);
+    }
+
+    @Override
+    public void setTextFieldShowBookAuthor(String author) {
+        tfShowBookAuthor.setText(author);
+    }
+
+    @Override
+    public void setTextFieldShowBookPublisher(String publisher) {
+        tfShowBookPublisher.setText(publisher);
+    }
+
+    @Override
+    public void setTextFieldShowIBNS(String ibns) {
+        tfShowBookIBNS.setText(ibns);
+    }
+
+    @Override
+    public void showTableListBookCopyInfo(BookCopyTableModel bookCopyTableModel) {
+        tbShowBookCopyInfo.setModel(bookCopyTableModel);
+    }
+
+    @Override
+    public int getTableListBookResultRowSelected(MouseEvent e) {
+        return tbShowListBook.rowAtPoint(e.getPoint());
+    }
+
+    @Override
+    public void setTableShowBookCopyMouseAction(MouseListener listener) {
+        tbShowBookCopyInfo.addMouseListener(listener);
+    }
+
+    @Override
+    public int getTableListBookCopyResultRowSelected(MouseEvent e) {
+        return tbShowBookCopyInfo.rowAtPoint(e.getPoint());
+    }
+
+    @Override
+    public void setTableBookCopySelectRow(int row) {
+        tbShowBookCopyInfo.setRowSelectionInterval(row,row);
+    }
+
+    @Override
+    public void showBookInfoToEdit(String bookNumber, String bookName, String bookAuthor, String bookPublisher, String ibns) {
+        tfEditBookNumber.setText(bookNumber);
+        tfEditBookName.setText(bookName);
+        tfEditBookAuthor.setText(bookAuthor);
+        tfEditBookPublisher.setText(bookPublisher);
+        tfEditBookIBNS.setText(ibns);
+    }
+
+    @Override
+    public void setTableShowListBookSelected(int row) {
+        tbShowListBook.setRowSelectionInterval(row,row);
+    }
+
+    @Override
+    public void showBookCopyInfoToEdit(int currentPosition) {
+
+    }
 }

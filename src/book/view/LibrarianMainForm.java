@@ -1,38 +1,19 @@
 package book.view;
 
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
-
-/**
- * Trang chủ của Thủ thư
- * @author HUYNH
- */
 public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianMainForm{
    
             
     public LibrarianMainForm() {
         initComponents();
-        setActionOnClose();
+        setButtonCloseActionForm();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setTitle("Trang chủ thủ thư");
       
-    }
-
-    public void setActionOnClose(){
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e); 
-                if (JOptionPane.showConfirmDialog(LibrarianMainForm.this, 
-                "Bạn có chắc chắn muốn thoát?", "Kết thúc?", 
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
-                    System.exit(0);
-            }
-            
-        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,10 +25,10 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnBorrowReturnBookManagement = new javax.swing.JButton();
+        btnBorrowCardManagement = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBookManagement = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,16 +36,16 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/borrow_return_book.png"))); // NOI18N
-        jButton1.setText("Quản Lý Mượn Trả");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBorrowReturnBookManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/borrow_return_book.png"))); // NOI18N
+        btnBorrowReturnBookManagement.setText("Quản Lý Mượn Trả");
+        btnBorrowReturnBookManagement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBorrowReturnBookManagementActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/borrow_card_management.png"))); // NOI18N
-        jButton3.setText("Quản Lý Thẻ Mượn");
+        btnBorrowCardManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/borrow_card_management.png"))); // NOI18N
+        btnBorrowCardManagement.setText("Quản Lý Thẻ Mượn");
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout_icon.png"))); // NOI18N
         btnLogout.setText("Đăng xuất");
@@ -74,11 +55,11 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book_management.png"))); // NOI18N
-        jButton2.setText("Quản Lý Sách");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBookManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book_management.png"))); // NOI18N
+        btnBookManagement.setText("Quản Lý Sách");
+        btnBookManagement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBookManagementActionPerformed(evt);
             }
         });
 
@@ -92,9 +73,9 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(btnBookManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrowReturnBookManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrowCardManagement, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -108,11 +89,11 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnBookManagement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnBorrowReturnBookManagement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(btnBorrowCardManagement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -133,24 +114,39 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    private void setButtonCloseActionForm(){
+         this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e); 
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                if (JOptionPane.showConfirmDialog(LibrarianMainForm.this, 
+                "Bạn có chắc chắn muốn thoát?", "Kết thúc?", 
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
+                    System.exit(0);
+            }   
+        });
+    }
+    
+    private void btnBookManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookManagementActionPerformed
        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnBookManagementActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBorrowReturnBookManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrowReturnBookManagementActionPerformed
       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBorrowReturnBookManagementActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
        
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBookManagement;
+    private javax.swing.JButton btnBorrowCardManagement;
+    private javax.swing.JButton btnBorrowReturnBookManagement;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
@@ -161,7 +157,27 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
     }
 
     @Override
-    public void closeLibrarianMainForm() {
-        this.setVisible(true);
+    public void hideLibrarianMainForm() {
+        this.setVisible(false);
+    }
+
+    @Override
+    public void setButtonBookManagementActionListener(ActionListener listener) {
+        btnBookManagement.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonBorrowReturnBookManagementActionListener(ActionListener listener) {
+        btnBorrowReturnBookManagement.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonBorrowCardManagementActionListener(ActionListener listener) {
+        btnBorrowCardManagement.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonLogoutActionListener(ActionListener listener) {
+        btnLogout.addActionListener(listener);
     }
 }

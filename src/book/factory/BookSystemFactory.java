@@ -5,6 +5,7 @@
  */
 package book.factory;
 
+import book.interfaces.IBookManagementSystem;
 import book.interfaces.IBorrowBookSystem;
 import book.interfaces.IReturnBookSystem;
 import book.system.BookSystem;
@@ -16,6 +17,7 @@ import book.system.BookSystem;
 public class BookSystemFactory {
     private static IBorrowBookSystem borrowSystem;
     private static IReturnBookSystem returnSystem;
+    private static IBookManagementSystem bookManagementSystem;
     
     public static IBorrowBookSystem getBorrowBookSystem () {
         if (borrowSystem == null) {
@@ -30,4 +32,12 @@ public class BookSystemFactory {
         }
         return returnSystem;
     }
+    
+    public static IBookManagementSystem getBookManagementSystem () {
+        if (bookManagementSystem == null) {
+            bookManagementSystem = new BookSystem();
+        }
+        return bookManagementSystem;
+    }
+    
 }
