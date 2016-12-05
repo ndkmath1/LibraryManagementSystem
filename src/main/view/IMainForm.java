@@ -6,6 +6,7 @@
 package main.view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 /**
  *
@@ -19,8 +20,10 @@ public interface IMainForm {
     
     public void setLogInButtonActionListener(ActionListener listener);
     
-    public void setExitButtonActionListener(ActionListener listener);
+    public void setButtonExitActionListener(WindowListener listener);
     
-    public void nontifiesUserExitApp();
+    public MainForm getMainFormInstance();
+    
+    public void setButtonRegisterActionListener(ActionListener listener);
     
 }

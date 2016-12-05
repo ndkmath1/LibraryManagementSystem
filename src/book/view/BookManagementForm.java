@@ -97,7 +97,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
         btnRefreshCopyBook = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        btnShowBookNumber = new javax.swing.JButton();
+        btnShowBookInfo = new javax.swing.JButton();
         tfEditBookNumber = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -111,7 +111,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
         jLabel20 = new javax.swing.JLabel();
         tfEditBookIBNS = new javax.swing.JTextField();
         btnChangeBookInfo = new javax.swing.JButton();
-        btnCancelEditBookInfo = new javax.swing.JButton();
+        btnRefreshEditBookInfo = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -122,7 +122,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
         jLabel24 = new javax.swing.JLabel();
         cbEditTypeOfCopyEdit = new javax.swing.JComboBox<>();
         btnChangeBookCopyInfo = new javax.swing.JButton();
-        btnCancelEditBookCOpy = new javax.swing.JButton();
+        btnRefreshEditBookCopy = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
@@ -574,10 +574,10 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
 
         tabManageBook.addTab("Thêm sách bản sao", jPanel4);
 
-        btnShowBookNumber.setText("Hiển thị thông tin");
-        btnShowBookNumber.addActionListener(new java.awt.event.ActionListener() {
+        btnShowBookInfo.setText("Hiển thị thông tin");
+        btnShowBookInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowBookNumberActionPerformed(evt);
+                btnShowBookInfoActionPerformed(evt);
             }
         });
 
@@ -600,7 +600,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
             }
         });
 
-        btnCancelEditBookInfo.setText("Hủy bỏ");
+        btnRefreshEditBookInfo.setText("Làm mới");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -631,7 +631,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
                         .addGap(58, 58, 58)
                         .addComponent(btnChangeBookInfo)
                         .addGap(35, 35, 35)
-                        .addComponent(btnCancelEditBookInfo)))
+                        .addComponent(btnRefreshEditBookInfo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -656,7 +656,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
                 .addGap(70, 70, 70)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChangeBookInfo)
-                    .addComponent(btnCancelEditBookInfo))
+                    .addComponent(btnRefreshEditBookInfo))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -673,7 +673,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfEditBookNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnShowBookNumber)
+                        .addComponent(btnShowBookInfo)
                         .addGap(0, 47, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -688,7 +688,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfEditBookNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShowBookNumber)
+                    .addComponent(btnShowBookInfo)
                     .addComponent(jLabel16))
                 .addGap(54, 54, 54)
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -719,7 +719,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
             }
         });
 
-        btnCancelEditBookCOpy.setText("Hủy");
+        btnRefreshEditBookCopy.setText("Làm mới");
 
         jLabel2.setText("VNĐ");
 
@@ -754,7 +754,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
                                         .addComponent(jLabel2))))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
-                                .addComponent(btnCancelEditBookCOpy))))
+                                .addComponent(btnRefreshEditBookCopy))))
                     .addComponent(jLabel23)
                     .addComponent(jLabel24))
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -780,7 +780,7 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChangeBookCopyInfo)
-                    .addComponent(btnCancelEditBookCOpy))
+                    .addComponent(btnRefreshEditBookCopy))
                 .addGap(39, 39, 39))
         );
 
@@ -906,9 +906,9 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
        
     }//GEN-LAST:event_btnChangeBookInfoActionPerformed
 
-    private void btnShowBookNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBookNumberActionPerformed
+    private void btnShowBookInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBookInfoActionPerformed
        
-    }//GEN-LAST:event_btnShowBookNumberActionPerformed
+    }//GEN-LAST:event_btnShowBookInfoActionPerformed
 
     private void btnShowBookCopyInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBookCopyInfoActionPerformed
        
@@ -920,17 +920,17 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCancelEditBookCOpy;
-    private javax.swing.JButton btnCancelEditBookInfo;
     private javax.swing.JButton btnCancelSaveNewBook;
     private javax.swing.JButton btnChangeBookCopyInfo;
     private javax.swing.JButton btnChangeBookInfo;
     private javax.swing.JButton btnRefreshCopyBook;
+    private javax.swing.JButton btnRefreshEditBookCopy;
+    private javax.swing.JButton btnRefreshEditBookInfo;
     private javax.swing.JButton btnSaveNewBook;
     private javax.swing.JButton btnSaveNewCopyBook;
     private javax.swing.JButton btnSearchBook;
     private javax.swing.JButton btnShowBookCopyInfo;
-    private javax.swing.JButton btnShowBookNumber;
+    private javax.swing.JButton btnShowBookInfo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -1240,7 +1240,93 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
     }
 
     @Override
-    public void showBookCopyInfoToEdit(int currentPosition) {
-
+    public void goToTabEdit() {
+        tabManageBook.setSelectedIndex(3);
     }
+
+    @Override
+    public String getCurrentBookCopyID(int row) {
+        return (String)tbShowBookCopyInfo.getModel().getValueAt(row, 0);
+    }
+
+    @Override
+    public void showBookCopyInfoToEdit(String bookCopyNumber, long prince, boolean type) {
+        tfBookCopyNumberEdit.setText(bookCopyNumber);
+        tfPrinceOfBookCopyEdit.setText(prince+"");
+        if(type) cbEditTypeOfCopyEdit.setSelectedIndex(0);
+        else cbEditTypeOfCopyEdit.setSelectedIndex(1);
+    }
+
+    @Override
+    public void setButtonShowBookInfoActionListener(ActionListener listener) {
+        btnShowBookInfo.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonShowBookCopyInfoActionListener(ActionListener listener) {
+        btnShowBookCopyInfo.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonChangeBookInfoActionListener(ActionListener listener) {
+        btnChangeBookInfo.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonChangeBookCopyInfoActionListener(ActionListener listener) {
+        btnChangeBookCopyInfo.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonRefreshEditBookInfoActionListener(ActionListener listener) {
+        btnRefreshEditBookInfo.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonRefreshEditBookCopyActionListener(ActionListener listener) {
+        btnRefreshEditBookCopy.addActionListener(listener);
+    }
+
+    @Override
+    public String getTextFieldEditBookName() {
+        return tfEditBookName.getText();
+    }
+
+    @Override
+    public String getTextFieldEditBookAuthor() {
+        return tfEditBookAuthor.getText();
+    }
+
+    @Override
+    public String getTextFieldEditBookPublisher() {
+        return tfEditBookPublisher.getText();
+    }
+
+    @Override
+    public String getTextFieldEditBookIbns() {
+        return tfEditBookIBNS.getText();
+    }
+
+    @Override
+    public String getTextFieldEditBookCopyPrince() {
+        return tfPrinceOfBookCopyEdit.getText();
+    }
+
+    @Override
+    public boolean getComboBoxEditBookType() {
+        if(cbEditTypeOfCopyEdit.getSelectedIndex()==0) return true;
+        return false;
+    }
+
+    @Override
+    public String getTextFieldEditBookNumber() {
+        return tfEditBookNumber.getText();
+    }
+
+    @Override
+    public String getTextFieldEditBookCopyNumber() {
+        return tfBookCopyNumberEdit.getText();
+    }
+
+    
 }

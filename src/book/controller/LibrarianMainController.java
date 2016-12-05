@@ -60,6 +60,8 @@ public class LibrarianMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            logInForm.setVisibleForm(true);
+            librarianMainForm.closeLibrarianMainForm();
         }
         
     }

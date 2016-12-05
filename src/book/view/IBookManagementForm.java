@@ -93,7 +93,39 @@ public interface IBookManagementForm {
     
     public void showBookInfoToEdit(String bookNumber, String bookName, String bookAuthor, String BookPublisher, String ibns);
     
+    public void showBookCopyInfoToEdit(String bookCopyNumber, long prince, boolean type);
+    
+    public String getCurrentBookCopyID(int row);
+    
     public void setTableShowListBookSelected(int row);
     
-    public void showBookCopyInfoToEdit(int currentPosition);
+    public void goToTabEdit();
+    
+    public void setButtonShowBookInfoActionListener(ActionListener listener);
+    
+    public void setButtonShowBookCopyInfoActionListener(ActionListener listener);
+    
+    public void setButtonChangeBookInfoActionListener(ActionListener listener);
+    
+    public void setButtonChangeBookCopyInfoActionListener(ActionListener listener);
+    
+    public void setButtonRefreshEditBookInfoActionListener(ActionListener listener);
+    
+    public void setButtonRefreshEditBookCopyActionListener(ActionListener listener);
+    
+    public String getTextFieldEditBookName();
+    
+    public String getTextFieldEditBookAuthor();
+    
+    public String getTextFieldEditBookPublisher();
+    
+    public String getTextFieldEditBookIbns();
+    
+    public String getTextFieldEditBookCopyPrince();
+    
+    public boolean getComboBoxEditBookType();
+    
+    public String getTextFieldEditBookNumber();
+    
+    public String getTextFieldEditBookCopyNumber();
 }

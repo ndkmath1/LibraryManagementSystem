@@ -7,7 +7,7 @@ import model.CatetoryBook;
 
 public class BookHelper {
     private static final String BOOK_NAME_CHARACTER = "[^A-Za-z0-9 ]";
-    private static final String BOOK_CHARACTER = "[^A-Za-z0-9]";
+    private static final String BOOK_CHARACTER = "[^A-Z0-9]";
     private static final String NUM_OF_BOOK_CHARACTER= "[^0-9]";
     private static final String PRINCE_OF_BOOK_CHARACTER="[^0-9]";
     private static final String AUTHOR_CHARACTER="[^A-Za-z ]";
@@ -113,4 +113,12 @@ public class BookHelper {
         }
         return "";
     } 
+    
+    public static boolean validateBookCopyNumber(String bookCopyNumber){
+        if(bookCopyNumber.length()<7 || bookCopyNumber.length()>10) return false;
+        if(!validateBookNumber(bookCopyNumber.substring(0,6))) return false;
+        for(int i=6;i<bookCopyNumber.length();i++)
+            if(!Character.isDigit(bookCopyNumber.charAt(i))) return false;
+        return true;
+    }
 }

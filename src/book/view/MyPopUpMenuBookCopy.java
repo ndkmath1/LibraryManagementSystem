@@ -10,24 +10,32 @@ import javax.swing.JTabbedPane;
 public class MyPopUpMenuBookCopy extends JPopupMenu{
     private JMenuItem anItem;
     private int currentPosition;
-    private JTabbedPane tab;
+    private String currentBookCopyNumber;
     private IBookManagementForm bookManagementForm;
     
     public MyPopUpMenuBookCopy(IBookManagementForm bookManagementForm){
         this.bookManagementForm=bookManagementForm;
-        this.tab=tab;
         anItem = new JMenuItem("Sửa thông tin bản sao");
         add(anItem);
-        anItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                bookManagementForm.showBookCopyInfoToEdit(currentPosition);
-            }
-        });
+    }
+    
+    public void setActionForItemMenu(ActionListener listener){
+        anItem.addActionListener(listener);
     }
     
     public void setPosition(int currentPosition){
         this.currentPosition=currentPosition;
     }
     
+    public int getCurrentPosition(){
+        return currentPosition;
+    }
+    
+    public void setCurrentBookCopyNumber(String currentBookCopyNumber){
+        this.currentBookCopyNumber=currentBookCopyNumber;
+    }
+    
+    public String getCurrentBookCopyNumber(){
+        return this.currentBookCopyNumber;
+    }
 }

@@ -180,4 +180,10 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
     public void setButtonLogoutActionListener(ActionListener listener) {
         btnLogout.addActionListener(listener);
     }
+
+    @Override
+    public void closeLibrarianMainForm() {
+        this.setVisible(false);
+        this.dispose();
+    }
 }

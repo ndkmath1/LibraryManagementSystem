@@ -13,16 +13,44 @@ public class MyPopUpMenu extends JPopupMenu{
     public MyPopUpMenu(IBookManagementForm bookManagementForm){
         this.bookManagementForm=bookManagementForm;
         anItem = new JMenuItem("Sửa thông tin sách");
+        add(anItem);
+//        anItem.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                bookManagementForm.showBookCopyInfoToEdit(currentPosition);
+//            }
+//        });
+    }
+    
+    public void setActionForItemMenu(ActionListener listener){
+        anItem.addActionListener(listener);
     }
     
     public void setPosition(int currentPosition){
         this.currentPosition=currentPosition;
     }
     
-    public void setMenuAction(ActionListener listener){
-        anItem.addActionListener(listener);
+    public int getCurrentPosition(){
+        return this.currentPosition;
     }
     
-    
-    
 }
+        
+//        extends JPopupMenu{
+//    private JMenuItem anItem;
+//    private int currentPosition;
+//    private IBookManagementForm bookManagementForm;
+//    
+//    public MyPopUpMenu(IBookManagementForm bookManagementForm){
+//        this.bookManagementForm=bookManagementForm;
+//        anItem = new JMenuItem("Sửa thông tin sách");
+//    }
+//    
+//    public void setPosition(int currentPosition){
+//        this.currentPosition=currentPosition;
+//    }
+//    
+//    public void setMenuAction(ActionListener listener){
+//        anItem.addActionListener(listener);
+//    }
+//}

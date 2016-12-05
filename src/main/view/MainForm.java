@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Khanh Nguyen
- */
 public class MainForm extends javax.swing.JFrame implements IMainForm {
 
     /**
@@ -22,7 +14,7 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
     public MainForm() {
         initComponents();
         setTextForComponent();
-        setWindowsListener();
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -37,9 +29,9 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         btnLogIn = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnCategoryBook = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,13 +39,6 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogInActionPerformed(evt);
-            }
-        });
-
-        btnExit.setText("Thoát");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
             }
         });
 
@@ -66,30 +51,32 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
 
         btnCategoryBook.setText("Danh mục sách");
 
+        btnRegister.setText("Đăng ký");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(btnSearch)
                 .addGap(27, 27, 27)
                 .addComponent(btnCategoryBook)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
                 .addComponent(btnLogIn)
-                .addGap(30, 30, 30)
-                .addComponent(btnExit)
-                .addGap(40, 40, 40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegister)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogIn)
                     .addComponent(btnSearch)
                     .addComponent(btnCategoryBook)
-                    .addComponent(btnExit))
+                    .addComponent(btnRegister))
                 .addGap(35, 35, 35))
         );
 
@@ -105,7 +92,7 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,15 +106,11 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExitActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCategoryBook;
-    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogIn;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnSearch;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -139,16 +122,6 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
         btnSearch.setText(MainFormConstants.BTN_SEARCH);
         btnCategoryBook.setText(MainFormConstants.BTN_CATEGORY_BOOK);
         btnLogIn.setText(MainFormConstants.BTN_LOGIN);
-        btnExit.setText(MainFormConstants.BTN_EXIT);
-    }
-
-    private void setWindowsListener() {
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                nontifiesUserExitApp();
-            }
-        });
     }
 
     @Override
@@ -167,21 +140,18 @@ public class MainForm extends javax.swing.JFrame implements IMainForm {
     }
 
     @Override
-    public void setExitButtonActionListener(ActionListener listener) {
-        btnExit.addActionListener(listener);
+    public void setButtonExitActionListener(WindowListener listener) {
+        this.addWindowListener(listener);
     }
 
     @Override
-    public void nontifiesUserExitApp() {
-        int option = JOptionPane.showConfirmDialog(
-                MainForm.this,
-                MainFormConstants.MESSAGE_EXIT,
-                MainFormConstants.TITLE_OPTIONPANE_EXIT,
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-        if (option == JOptionPane.YES_OPTION) {
-            closeForm();
-        }
+    public MainForm getMainFormInstance() {
+        return this;
     }
 
+    @Override
+    public void setButtonRegisterActionListener(ActionListener listener) {
+        btnRegister.addActionListener(listener);
+    }
+    
 }
