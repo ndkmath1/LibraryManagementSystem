@@ -23,4 +23,8 @@ public interface IActivateAccountForm {
     
     public void closeForm();
     
+    public void nontifiesActivateCodeWrong();
+    
+    public void nontifiesActivateSuccessful();
+    
 }

@@ -6,6 +6,7 @@
 package account.view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -192,5 +193,15 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
     @Override
     public void closeForm() {
         super.dispose();
+    }
+
+    @Override
+    public void nontifiesActivateCodeWrong() {
+        JOptionPane.showMessageDialog(this, "Mã kích hoạt sai", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void nontifiesActivateSuccessful() {
+        JOptionPane.showMessageDialog(this, "Kích hoạt tài khoản thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 }

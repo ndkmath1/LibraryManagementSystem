@@ -23,16 +23,19 @@ public class ActivateAccountController {
     private IActivateAccountForm activateAccount;
     private IUserMainForm userMainForm;
     private IBorrowerCardSystem bCardSystem = BorrowerCardSystemFactory.getBorrowerCardSystem();
+    private Account mAccount;
 
     public ActivateAccountController(IUserMainForm userMainForm, Account mAccount) {
-
-        //get state of account
-        if (bCardSystem.getStateAccount(mAccount.getAccounrID())) {
+        this.mAccount = mAccount;
+        if (bCardSystem.isAccountHasBorrowerCard(mAccount.getAccounrID())) {
+            userMainForm.nontifiesNotYetBorrowerCard();
+        } else if (!bCardSystem.getStateAccount(mAccount.getAccounrID())) {
             userMainForm.nontifiesAccountIsActivated();
         } else {
             this.userMainForm = userMainForm;
             activateAccount = new ActivateAccountForm();
             activateAccount.setVisibleForm(true);
+            activateAccount.setTextForLabelInfo(bCardSystem.getInfoAccount(mAccount));
             activateAccount.setButtonActivateListener(new ButtonActivateActionListener());
         }
     }
@@ -41,7 +44,14 @@ public class ActivateAccountController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Button activate is clicked");
+            //check activate code
+            if (bCardSystem.checkInfoActivate(mAccount.getAccounrID(), activateAccount.getActivateCode())) {
+                if (bCardSystem.setAccountActivated(mAccount.getAccounrID())) {
+                    activateAccount.nontifiesActivateSuccessful();
+                }
+            } else {
+                activateAccount.nontifiesActivateCodeWrong();
+            }
         }
     }
 }

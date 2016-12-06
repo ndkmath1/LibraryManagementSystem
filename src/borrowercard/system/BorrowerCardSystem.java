@@ -84,29 +84,61 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
         return result;
     }
     
+    @Override
     public boolean checkInfoActivate(int accountId, String activateCode) {
         try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_INFO_ACTIVATE)) {
-            
+            stmt.setInt(1, accountId);
+            stmt.setString(2, activateCode);
+            System.out.println("check info account: " + stmt.toString());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                System.out.println("true");
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BorrowerCardSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("false");
+        return false;
+    }
+
+    @Override
+    public boolean setAccountActivated(int accountId) {
+        try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.SET_ACCOUNT_IS_ACTIVATED)) {
+            stmt.setInt(1, accountId);
+            stmt.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(BorrowerCardSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
+    
+    
+    
+//    public static void main(String[] args) {
+//        BorrowerCardSystem bCardSystem = new BorrowerCardSystem();
+//        Account mAccount = new Account();
+//        mAccount.setAccounrID(9);
+//        mAccount.setUserName("huynh");
+//        mAccount.setEmail("huynh@mail.com");
+//        mAccount.setStudentID(1);
+//        String b = bCardSystem.getInfoAccount(mAccount);
+//        System.out.println(b);
+//    }
 
     @Override
-    public String setAccountActivated() {
-        return null;
-    }
-    
-    public static void main(String[] args) {
-        BorrowerCardSystem bCardSystem = new BorrowerCardSystem();
-        Account mAccount = new Account();
-        mAccount.setAccounrID(9);
-        mAccount.setUserName("huynh");
-        mAccount.setEmail("huynh@mail.com");
-        mAccount.setStudentID(1);
-        String b = bCardSystem.getInfoAccount(mAccount);
-        System.out.println(b);
+    public boolean isAccountHasBorrowerCard(int accountId) {
+        try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_ACCOUNT_HAS_BORROWER_CARD)) {
+            stmt.setInt(1, accountId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BorrowerCardSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }

@@ -12,6 +12,6 @@ public interface IUserMainForm {
     
     public void nontifiesAccountIsActivated();
     
-    public void nontifiesActivateCodeWrong();
+    public void nontifiesNotYetBorrowerCard();
     
 }
