@@ -128,4 +128,8 @@ public interface IBookManagementForm {
     public String getTextFieldEditBookNumber();
     
     public String getTextFieldEditBookCopyNumber();
+    
+    public void setTextFieldShowBookNumberInfoKeyListener(KeyListener listener);
+    
+    public String getTextFieldShowBookNumber();
 }

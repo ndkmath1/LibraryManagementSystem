@@ -1328,5 +1328,15 @@ public class BookManagementForm extends javax.swing.JFrame implements IBookManag
         return tfBookCopyNumberEdit.getText();
     }
 
+    @Override
+    public void setTextFieldShowBookNumberInfoKeyListener(KeyListener listener) {
+        tfShowBookNumber.addKeyListener(listener);
+    }
+
+    @Override
+    public String getTextFieldShowBookNumber() {
+        return tfShowBookNumber.getText();
+    }
+
     
 }

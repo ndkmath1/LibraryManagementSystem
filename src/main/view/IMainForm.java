@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.view;
 
+import book.view.BookCopyTableModel;
+import book.view.BookTableModel;
+import book.view.MyComboboxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowListener;
+import javax.swing.table.TableModel;
 
-/**
- *
- * @author Khanh Nguyen
- */
 public interface IMainForm {
     
     public void closeForm();
@@ -26,4 +24,25 @@ public interface IMainForm {
     
     public void setButtonRegisterActionListener(ActionListener listener);
     
+    public void displayNewBook(BookTableModel bookTableModel);
+    
+    public void showListCategoryBook(MyComboboxModel myComboboxModel);
+    
+    public void setComboBoxCategoryBookActionListener(ActionListener listener);
+    
+    public int getComboBoxCategoryBookSelectedIndex();
+    
+    public void setTaleShowBookMouseListener(MouseListener listener);
+    
+    public int getTableListBookResultRowSelected(MouseEvent e);
+    
+    public void setDataBookToShow(String bookNumber, String name, String author, String publisher, String ibns, BookCopyTableModel bookCopyTableModel);
+    
+    public void setButtonSearchBookActionListener(ActionListener listener);
+    
+    public String getTextFieldSearchBook();
+    
+    public void setTextFieldSearchBookKeyListener(KeyListener listener);
+    
+    public void doButtonSearchBookClick();
 }
