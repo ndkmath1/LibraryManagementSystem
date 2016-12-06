@@ -251,17 +251,57 @@ public class BookSystem implements IBookManagementSystem, IBorrowBookSystem, IRe
 
     @Override
     public void updateBookInfo(Book bookInfo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        PreparedStatement ps;
+        try {
+            ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_UPDATE_BOOK_INFO);
+            ps.setString(1, bookInfo.getTitle());
+            ps.setString(2, bookInfo.getAuthor());
+            ps.setString(3, bookInfo.getPublisher());
+            ps.setString(4, bookInfo.getIbns());
+            ps.setInt(5, bookInfo.getBookID());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("111111111111111");
+        }
     }
 
     @Override
     public BookCopy getBookCopyInfo(String bookNumber, int bookCopyNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_GET_BOOK_COPY_INFO);
+            ps.setString(1, bookNumber);
+            ps.setInt(2, bookCopyNumber);
+            ResultSet res=ps.executeQuery();
+            if(res.next()){
+                BookCopy bookCopy=new BookCopy();
+                bookCopy.setBookCopyID(res.getInt(1));
+                bookCopy.setBookID(res.getInt(2));
+                bookCopy.setSequenceNumber(res.getInt(3));
+                bookCopy.setTypeOfCopy(res.getBoolean(4));
+                bookCopy.setPrince(res.getLong(5));
+                return bookCopy;
+            }
+            else return null;
+        } catch (SQLException ex) {
+            System.out.println("errrrrrrr="+ex);
+        }
+        return null;
     }
 
     @Override
     public void updateBookCopyInfo(BookCopy bookCopy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         
+        PreparedStatement ps;
+        try {
+            ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_UPDATE_BOOK_COPY_INFO);
+            ps.setBoolean(1, bookCopy.isTypeOfCopy());
+            ps.setLong(2, bookCopy.getPrince());
+            ps.setInt(3, bookCopy.getBookCopyID());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("2222222222" +ex);
+        }
     }
     
     private int getNumOfBookWithCategory(int cateID){

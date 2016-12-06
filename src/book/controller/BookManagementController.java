@@ -10,6 +10,7 @@ import book.view.ILibrarianMainForm;
 import book.view.MyComboboxModel;
 import book.view.MyPopUpMenu;
 import book.view.MyPopUpMenuBookCopy;
+import constants.BookManagementConstant;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -31,9 +32,12 @@ public class BookManagementController{
     private ArrayList<CatetoryBook> listCategoryBook;
     private IBookManagementSystem bookManagementSystem;
     private ArrayList<Book> listResultBook;
+    private ArrayList<BookCopy> listResultBookCopy;
     private MyPopUpMenu myPopUpMenu;
     private MyPopUpMenuBookCopy myPopUpMenuBookCopy;
-
+    private Book currentBookToEdit;
+    private BookCopy currentBookCopyToEdit;
+    
     public BookManagementController(ILibrarianMainForm librarianMainForm){
         this.librarianMainForm=librarianMainForm;
         bookManagementSystem=BookSystemFactory.getBookManagementSystem();
@@ -49,9 +53,17 @@ public class BookManagementController{
         bookManagementForm.setTextFieldDataSearchKeyAction(new TextFieldSearchBookListener());
         bookManagementForm.setTableShowBookResultMouseAction(new TableShowBookResultMouseListener());
         bookManagementForm.setTableShowBookCopyMouseAction(new TableShowBookCopyResultMouseListener());
+        bookManagementForm.setButtonShowBookInfoActionListener(new ButtonShowBookInfoListener());
+        bookManagementForm.setButtonShowBookCopyInfoActionListener(new ButtonShowBookCopyInfoListener());
+        bookManagementForm.setButtonChangeBookInfoActionListener(new ButtonChangeBookInfoListener());
+        bookManagementForm.setButtonChangeBookCopyInfoActionListener(new ButtonChangeBookCopyInfoListener());
+        bookManagementForm.setTextFieldShowBookNumberInfoKeyListener(new TextFieldShowBookNumberKeyListener());
+        
         loadListCategoryBook();
         myPopUpMenu=new MyPopUpMenu(bookManagementForm);
-        myPopUpMenu.setMenuAction(new PopupMenuActionListener());
+        myPopUpMenu.setActionForItemMenu(new MyPopupMenuActionListener());
+        myPopUpMenuBookCopy=new MyPopUpMenuBookCopy(bookManagementForm);
+        myPopUpMenuBookCopy.setActionForItemMenu(new MyPopupMenuCopyBookListener());
     }
     
     public void loadListCategoryBook(){
@@ -89,25 +101,25 @@ public class BookManagementController{
 
             String bookTitle=bookManagementForm.getTextFieldBookTitleOnSaveBook();
             if(!BookHelper.validateBookName(bookTitle)){
-                bookManagementForm.noticeError("Nỗi cú pháp nhập", "Tên sách nhập không đúng");
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Tên sách nhập không đúng");
                 return;
             }
 
             String publisher=bookManagementForm.getTextFieldBookPublisherOnSaveBook();
             if(!BookHelper.validatePublisher(publisher)){
-                bookManagementForm.noticeError( "Nỗi cú pháp nhập", "Ten nhà xuất bản không đúng");
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Ten nhà xuất bản không đúng");
                 return;
             }
             String author=bookManagementForm.getTextFieldBookAuthorOnSaveBook();
             if(!BookHelper.validateAuthor(author)){
-                bookManagementForm.noticeError("Nỗi cú pháp nhập","Ten tác giả không đúng");
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Ten tác giả không đúng");
                 return;
             }
 
             String ibns=bookManagementForm.getTextFieldBookIBNSOnSaveBook();
             if(!ibns.equals("")){
                 if(!BookHelper.validateIBNS(ibns)){
-                    bookManagementForm.noticeError( "Nỗi cú pháp nhập","Mã IBNS không đúng!");
+                    bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Mã IBNS không đúng!");
                     return;
                 }
             }
@@ -115,7 +127,7 @@ public class BookManagementController{
             if(bookManagementForm.getCheckBoxSelectTypeEnter()){
                 String number=bookManagementForm.getTextFieldBookNumberOnSaveBook();
                 if(BookHelper.validateNumOfBook(number)){
-                    bookManagementForm.noticeError( "Nỗi cú pháp nhập","Số sách không đúng!");
+                    bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Số sách không đúng!");
                     return;
                 } 
                 else numOfBook=Integer.valueOf(number);
@@ -123,19 +135,19 @@ public class BookManagementController{
             Book book=new Book(cateID, numOfBook ,bookTitle, author, publisher, ibns);         
             //check if book is existed!
             if(bookManagementSystem.isBookExisted(book.getTitle(),book.getPublisher(), book.getAuthor())){ 
-                bookManagementForm.noticeError("Lỗi thêm mới sách", "Sách đã tồn tại");
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ADD_BOOK_TITLE, "Sách đã tồn tại");
                 return;
             }
 
             if(numOfBook>0){
                 if(bookManagementSystem.checkBookNumber(book.getCateID(), book.getNumOfBook())>0){
-                    bookManagementForm.noticeError("Lỗi thêm mới sách", "Số sách đã tồn tại");
+                    bookManagementForm.noticeError(BookManagementConstant.ERROR_ADD_BOOK_TITLE, "Số sách đã tồn tại");
                     return;
                 }
             }
 
             bookManagementSystem.saveNewBook(book);    
-            bookManagementForm.noticeSuccessfully("Thành công", "Thêm mới sách thành công");
+            bookManagementForm.noticeSuccessfully(BookManagementConstant.SUCCESSFULLY_ADD_BOOK, "Thêm mới sách thành công");
         }
     }
     
@@ -144,8 +156,7 @@ public class BookManagementController{
         @Override
         public void actionPerformed(ActionEvent e) {
 
-        }
-        
+        }        
     }
     
     private class ButtonSaveBookCopyListener implements ActionListener{
@@ -154,7 +165,7 @@ public class BookManagementController{
         public void actionPerformed(ActionEvent e) {
             String bookNumber=bookManagementForm.getTextFieldBookNumberOfNewBookCopy();
             if(!BookHelper.validateBookNumber(bookNumber)){
-                bookManagementForm.noticeError("Lỗi cú pháp", "Mã số sách không đúng");
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Mã số sách không đúng");
                 return;
             }
             String category=bookNumber.substring(0, 2);
@@ -220,7 +231,7 @@ public class BookManagementController{
                     if(dataSearch.equals("")) listResultBook= bookManagementSystem.getBooksByID("");
                     else{
                         if(!BookHelper.validateBookNumber(dataSearch)){
-                        bookManagementForm.noticeError("Lỗi cú pháp", "Mã số sách không đúng");
+                        bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Mã số sách không đúng");
                         return;
                         }
                         listResultBook=bookManagementSystem.getBooksByID(BookHelper.deFormatOfBookNumber(dataSearch));
@@ -229,7 +240,7 @@ public class BookManagementController{
                 
                 case 2:
                     if(!BookHelper.validateBookName(dataSearch)){
-                        bookManagementForm.noticeError("Lỗi cú pháp", "Tên sách không đúng");
+                        bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Tên sách không đúng");
                         return;
                     }
                     listResultBook=bookManagementSystem.getBooksByName(dataSearch);
@@ -237,7 +248,7 @@ public class BookManagementController{
                 
                 case 3:
                     if(!BookHelper.validateAuthor(dataSearch)){
-                        bookManagementForm.noticeError("Lỗi cú pháp", "Tên tác giả không đúng");
+                        bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Tên tác giả không đúng");
                         return;
                     }
                     listResultBook=bookManagementSystem.getBooksByAuthor(dataSearch);
@@ -245,7 +256,7 @@ public class BookManagementController{
                 
                 case 4:
                     if(!BookHelper.validatePublisher(dataSearch)){
-                        bookManagementForm.noticeError("Lỗi cú pháp", "Tên NXB không đúng");
+                        bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Tên NXB không đúng");
                         return;
                     }
                     listResultBook=bookManagementSystem.getBooksByPublisher(dataSearch);
@@ -271,15 +282,17 @@ public class BookManagementController{
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            
             int row = bookManagementForm.getTableListBookResultRowSelected(e);
             if(row>-1){
                 Book book=listResultBook.get(row);
-                bookManagementForm.setTextFieldShowBookNumber(BookHelper.getCateCode(row, listCategoryBook)+book.getNumOfBook());
+                bookManagementForm.setTextFieldShowBookNumber(BookHelper.formatOfBookNumber(BookHelper.getCateCode(book.getCateID(), listCategoryBook),book.getNumOfBook()));
                 bookManagementForm.setTextFieldShowBookName(book.getTitle());
                 bookManagementForm.setTextFieldShowBookAuthor(book.getAuthor());
                 bookManagementForm.setTextFieldShowBookPublisher(book.getPublisher());
                 bookManagementForm.setTextFieldShowIBNS(book.getIbns());
-                bookManagementForm.showTableListBookCopyInfo(new BookCopyTableModel(BookHelper.formatOfBookNumber(BookHelper.getCateCode(book.getCateID(), listCategoryBook),book.getNumOfBook()), bookManagementSystem.getCopyBooks(book.getBookID())));
+                listResultBookCopy=bookManagementSystem.getCopyBooks(book.getBookID());
+                bookManagementForm.showTableListBookCopyInfo(new BookCopyTableModel(BookHelper.formatOfBookNumber(BookHelper.getCateCode(book.getCateID(), listCategoryBook),book.getNumOfBook()), listResultBookCopy));
             }       
         }
 
@@ -294,38 +307,166 @@ public class BookManagementController{
                 }            
             }
         }
-        
-        
     }
     
     private class TableShowBookCopyResultMouseListener extends MouseAdapter{
-
+        
         @Override
         public void mouseReleased(MouseEvent e) {
             if(SwingUtilities.isRightMouseButton(e)){
                 int row = bookManagementForm.getTableListBookCopyResultRowSelected(e);
                 bookManagementForm.setTableBookCopySelectRow(row);
-                if(row>-1){
+                if(row>-1){ 
                     myPopUpMenuBookCopy.show(e.getComponent(), e.getX(), e.getY());
                     myPopUpMenuBookCopy.setPosition(row);
+                    myPopUpMenuBookCopy.setCurrentBookCopyNumber(bookManagementForm.getCurrentBookCopyID(row));
                 }
             }
+        }
+    }
+    
+    private class MyPopupMenuActionListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentBookToEdit=listResultBook.get(myPopUpMenu.getCurrentPosition());
+            String bookNumber=BookHelper.formatOfBookNumber(BookHelper.getCateCode(currentBookToEdit.getCateID(), listCategoryBook),currentBookToEdit.getNumOfBook());
+            bookManagementForm.showBookInfoToEdit(bookNumber, currentBookToEdit.getTitle(), currentBookToEdit.getAuthor(), currentBookToEdit.getPublisher(), currentBookToEdit.getIbns());
+            bookManagementForm.goToTabEdit();
         }
         
     }
     
-    private class PopupMenuActionListener implements ActionListener{
+    private class MyPopupMenuCopyBookListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-//        anItem.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                bookManagementForm.showBookInfoToEdit(currentPosition);
-//               // tab.setSelectedIndex(3);
-//            }
-//        });
+            currentBookCopyToEdit=listResultBookCopy.get(myPopUpMenuBookCopy.getCurrentPosition());
+            bookManagementForm.showBookCopyInfoToEdit(myPopUpMenuBookCopy.getCurrentBookCopyNumber(), currentBookCopyToEdit.getPrince(), currentBookCopyToEdit.isTypeOfCopy());
+            bookManagementForm.goToTabEdit();
         
+        }
+        
+    }
+    
+    private class ButtonShowBookInfoListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String bookNumber=bookManagementForm.getTextFieldEditBookNumber();
+            if(!BookHelper.validateBookNumber(bookNumber)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Mã số sách nhập sai");
+                return;
+            }
+            ArrayList<Book> listResultBook=bookManagementSystem.getBooksByID(BookHelper.deFormatOfBookNumber(bookNumber));
+            
+            if(listResultBook.size()==0){
+                bookManagementForm.noticeError("Lỗi tìm kiếm", "Không tìm thấy mã sách này");
+                return;
+            }
+            currentBookToEdit=listResultBook.get(0);
+            bookManagementForm.showBookInfoToEdit(bookNumber, currentBookToEdit.getTitle(), currentBookToEdit.getAuthor(), currentBookToEdit.getPublisher(), currentBookToEdit.getIbns());
+        }
+    }
+    
+    private class ButtonShowBookCopyInfoListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String bookCopyNumber=bookManagementForm.getTextFieldEditBookCopyNumber();
+            if(!BookHelper.validateBookCopyNumber(bookCopyNumber)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Mã số sách bản sao không đúng");
+                return;
+            }
+            String bookNumber=BookHelper.deFormatOfBookNumber(bookCopyNumber.substring(0,6));
+            int numOfCopy=Integer.valueOf(bookCopyNumber.substring(6, bookCopyNumber.length()));         
+            currentBookCopyToEdit= bookManagementSystem.getBookCopyInfo(bookNumber, numOfCopy);
+            if(currentBookCopyToEdit==null) {
+                bookManagementForm.noticeError("Lỗi tìm kiếm", "Không tìm thấy sách bản sao này");
+                return;
+            }
+            bookManagementForm.showBookCopyInfoToEdit(bookCopyNumber, currentBookCopyToEdit.getPrince(), currentBookCopyToEdit.isTypeOfCopy());
+        }
+        
+    }
+    
+    private class ButtonChangeBookInfoListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String name=bookManagementForm.getTextFieldEditBookName();
+            if(!BookHelper.validateBookName(name)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Tên sách nhập vào không đúng!");
+                return;
+            }
+            String author=bookManagementForm.getTextFieldEditBookAuthor();
+            if(!BookHelper.validateAuthor(author)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Tên tác giả không đúng!");
+                return;
+            }
+            String publisher=bookManagementForm.getTextFieldEditBookPublisher();
+            if(!BookHelper.validatePublisher(publisher)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Tên NXB không đúng!");
+                return;
+            }
+            String ibns=bookManagementForm.getTextFieldEditBookIbns();
+            if(!BookHelper.validateIBNS(ibns)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE,"Mã IBNS không đúng!");
+                return;
+            }
+            System.out.println("name="+name +" author="+author+ " publisher="+publisher+" ibns="+ibns);
+            currentBookToEdit.setTitle(name);
+            currentBookToEdit.setAuthor(author);
+            currentBookToEdit.setPublisher(publisher);
+            currentBookToEdit.setIbns(ibns);
+            bookManagementSystem.updateBookInfo(currentBookToEdit);
+            bookManagementForm.noticeSuccessfully("Thành công", "Cập nhật thông tin sách thành công");
+        }
+        
+    }
+    
+    private class ButtonChangeBookCopyInfoListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String prince=bookManagementForm.getTextFieldEditBookCopyPrince();
+            if(!BookHelper.validatePrinceOfCopy(prince)){
+                bookManagementForm.noticeError(BookManagementConstant.ERROR_ENTER_TITLE, "Giá sách không đúng!");
+                return;
+            }
+            long bookPrince=Long.valueOf(prince);
+            boolean type=bookManagementForm.getComboBoxEditBookType();
+            System.out.println("prince="+prince+" type="+type);
+            currentBookCopyToEdit.setPrince(bookPrince);
+            currentBookCopyToEdit.setTypeOfCopy(type);
+            bookManagementSystem.updateBookCopyInfo(currentBookCopyToEdit);
+            bookManagementForm.noticeSuccessfully("Thành công", "Cập nhật thông tin sách bản sao thành công");
+        }
+        
+    }
+    private class TextFieldShowBookNumberKeyListener extends KeyAdapter{
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                String bookNumber=bookManagementForm.getTextFieldShowBookNumber();
+                if(!BookHelper.validateBookNumber(bookNumber)){
+                    bookManagementForm.noticeError("Lỗi nhập dữ liệu", "Mã số sách không đúng");
+                    return;
+                }
+                 
+                ArrayList<Book> listBook=bookManagementSystem.getBooksByID(BookHelper.deFormatOfBookNumber(bookNumber));
+                if(listBook.size()==0){
+                    bookManagementForm.noticeError("Lỗi tìm kiếm", "Không tìm thấy mã sách này");
+                    return;
+                }
+                bookManagementForm.setTextFieldShowBookName(listBook.get(0).getTitle());
+                bookManagementForm.setTextFieldShowBookAuthor(listBook.get(0).getAuthor());
+                bookManagementForm.setTextFieldShowBookPublisher(listBook.get(0).getPublisher());
+                bookManagementForm.setTextFieldShowIBNS(listBook.get(0).getIbns());
+                listResultBookCopy=bookManagementSystem.getCopyBooks(listBook.get(0).getBookID());
+                bookManagementForm.showTableListBookCopyInfo(new BookCopyTableModel(BookHelper.formatOfBookNumber(BookHelper.getCateCode(listBook.get(0).getCateID(), listCategoryBook),listBook.get(0).getNumOfBook()), listResultBookCopy));
+            }
         }
         
     }

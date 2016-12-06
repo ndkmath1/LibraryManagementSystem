@@ -37,6 +37,7 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login_icon.png"))); // NOI18N
         btnLogin.setText("Đăng nhập");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,8 +64,10 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("THÔNG TIN ĐĂNG NHẬP");
 
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back_icon.png"))); // NOI18N
         btnBack.setText("Quay lại");
 
+        btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/register_icon.png"))); // NOI18N
         btnRegister.setText("Đăng ký");
 
         cbBoxTypeOfAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Người dùng", "Quản lý" }));
@@ -86,13 +89,13 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegister)
-                        .addGap(31, 31, 31)
+                        .addGap(29, 29, 29)
                         .addComponent(btnBack))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(tfUsernameEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                         .addComponent(tfPassword)
                         .addComponent(cbBoxTypeOfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 146, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -120,7 +123,7 @@ public class LogInForm extends javax.swing.JFrame implements ILogInForm {
                     .addComponent(btnRegister)
                     .addComponent(btnLogin)
                     .addComponent(btnBack))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();

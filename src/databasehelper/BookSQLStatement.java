@@ -59,5 +59,12 @@ public class BookSQLStatement {
     public static final String QUERY_SEARCH_BOOK_BY_PUBLISHER="SELECT * FROM "+BookTable.TABLE_NAME+" WHERE "+BookTable.PUBLISHER_COL+" LIKE ?";
 
     public static final String QUERY_GET_BOOK_COPY="SELECT * FROM "+BookCopyTable.TABLE_NAME+" WHERE "+BookCopyTable.BOOKID_COL+"=?";
+
+    public static final String QUERY_GET_BOOK_COPY_INFO="SELECT * FROM book_copy,book, category WHERE book.id=book_copy.book_id AND book.cate_id=category.id AND concat(cate_code, book.book_id) = ? AND book_copy.seq=?"; 
+
+    public static final String QUERY_UPDATE_BOOK_INFO="UPDATE book SET title=?, authorS=?, publisher=?, isbn=? WHERE id=?";
+    
+    public static final String QUERY_UPDATE_BOOK_COPY_INFO="UPDATE book_copy SET type=?, price=? WHERE id=?";
+
 }
 

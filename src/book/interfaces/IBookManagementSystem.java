@@ -11,7 +11,6 @@ public interface IBookManagementSystem {
     
     public void saveNewBook(Book book);
     
-   
     public boolean saveNewCopyBook(BookCopy bookCopy);
     
     public int getNumOfBook(int category);
@@ -37,5 +36,4 @@ public interface IBookManagementSystem {
     public BookCopy getBookCopyInfo(String bookNumber, int bookCopyNumber);
     
     public void updateBookCopyInfo(BookCopy bookCopy);
-    
 }

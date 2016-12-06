@@ -852,7 +852,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="tfEditBookNumber" min="-2" pref="182" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnShowBookNumber" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowBookInfo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="47" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -872,7 +872,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tfEditBookNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnShowBookNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnShowBookInfo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -883,12 +883,12 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="btnShowBookNumber">
+                <Component class="javax.swing.JButton" name="btnShowBookInfo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb; th&#xf4;ng tin"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowBookNumberActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowBookInfoActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="tfEditBookNumber">
@@ -940,7 +940,7 @@
                                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                                       <Component id="btnChangeBookInfo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="btnCancelEditBookInfo" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnRefreshEditBookInfo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -973,7 +973,7 @@
                               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btnChangeBookInfo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnCancelEditBookInfo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnRefreshEditBookInfo" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="112" max="32767" attributes="0"/>
                           </Group>
@@ -1017,9 +1017,9 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeBookInfoActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnCancelEditBookInfo">
+                    <Component class="javax.swing.JButton" name="btnRefreshEditBookInfo">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="H&#x1ee7;y b&#x1ecf;"/>
+                        <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1065,7 +1065,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                                          <Component id="btnCancelEditBookCOpy" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnRefreshEditBookCopy" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1100,7 +1100,7 @@
                           <EmptySpace pref="29" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnChangeBookCopyInfo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCancelEditBookCOpy" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnRefreshEditBookCopy" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
@@ -1161,9 +1161,9 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeBookCopyInfoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnCancelEditBookCOpy">
+                <Component class="javax.swing.JButton" name="btnRefreshEditBookCopy">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
+                    <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">

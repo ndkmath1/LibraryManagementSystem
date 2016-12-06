@@ -16,20 +16,29 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JComponent;
+import main.view.IMainForm;
 import model.Account;
 import model.User;
 import utils.AccountHelper;
 import utils.UserInfoHelper;
 
 public class SignUpController {
-
+    private IMainForm mainForm;
     private ILogInForm loginForm;
     private ISignUpForm signUpForm;
     private IAccountSystem accountSystem;
-   
+    
+    public SignUpController(IMainForm mainForm){
+        init();
+    }
+    
     public SignUpController(ILogInForm loginForm) {
         this.loginForm = loginForm;
         loginForm.setVisibleForm(false);
+        init();
+    }
+    
+    public void init(){
         signUpForm = new SignUpForm();
         signUpForm.setVisibleForm(true);
         accountSystem=AccountSystemFactory.getAccountSystem();
@@ -46,7 +55,6 @@ public class SignUpController {
         signUpForm.setTextFieldEmailKeyAction(new TextFieldKeyEmailActionListener());
         signUpForm.setTextFieldNationalIDNumberKeyAction(new TextFieldsKeyActionListener());
         signUpForm.setTextFieldAddressKeyAction(new TextFieldAddressActionListener());
-        
         signUpForm.setButtonRefreshActionListener(new ButtonRefreshActionListener());
     }
     
@@ -164,7 +172,8 @@ public class SignUpController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            loginForm.setVisibleForm(true);
+            if(loginForm!=null) loginForm.setVisibleForm(true);
+            else if(mainForm!=null) mainForm.setVisibleForm(true);
             signUpForm.closeForm();
         }
     }

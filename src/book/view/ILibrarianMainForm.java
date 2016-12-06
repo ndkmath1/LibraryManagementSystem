@@ -16,5 +16,8 @@ public interface ILibrarianMainForm {
     public void setButtonBorrowCardManagementActionListener(ActionListener listener);
     
     public void setButtonLogoutActionListener(ActionListener listener);
-            
+    
+    public void closeLibrarianMainForm();
+    
+    
 }
