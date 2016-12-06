@@ -7,15 +7,15 @@ package lms;
 
 import account.view.LogInForm;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import main.controller.MainController;
 import main.view.MainForm;
-import javax.swing.UIManager;
 
 public class LibraryManagementSystem {
 
     public static void main(String args[]) {
 
-        //setLookAndFeel();
+        setLookAndFeelWindows();
 
         /* Create and display the form */
         SwingUtilities.invokeLater(() -> {
@@ -43,12 +43,12 @@ public class LibraryManagementSystem {
         }
     }
 
-    private static void setLookAndFeel() {
+    private static void setLookAndFeelWindows() {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }         
     }
 
 }
