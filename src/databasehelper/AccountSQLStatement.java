@@ -115,4 +115,5 @@ public final class AccountSQLStatement {
     
     public static final String CHECK_ACCOUNT_HAS_BORROWER_CARD = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME + " WHERE " + BorrowerCardTable.ACCOUNT_ID_COL + " = ?";
     
+    public static final String CHECK_BORROW_CARD_EXISTED="SELECT * FROM "+ BorrowerCardTable.TABLE_NAME + " WHERE " +BorrowerCardTable.BORROWER_CARD_ID_COL+"=?";
 }

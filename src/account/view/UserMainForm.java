@@ -172,5 +172,10 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
     public void nontifiesNotYetBorrowerCard() {
         JOptionPane.showMessageDialog(this, "Chưa có thẻ mượn", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    @Override
+    public void setVisibleForm(boolean isVisible) {
+        setVisible(isVisible);
+    }
     
 }

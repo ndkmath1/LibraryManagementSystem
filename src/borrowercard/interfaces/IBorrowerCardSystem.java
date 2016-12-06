@@ -23,6 +23,8 @@ public interface IBorrowerCardSystem {
     public boolean setAccountActivated(int accountId);
     
     public boolean isAccountHasBorrowerCard(int accountId);
+
+    public int checkBorrowCard(int borrowCardID);
    
     
 }

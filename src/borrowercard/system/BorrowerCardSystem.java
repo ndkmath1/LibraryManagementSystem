@@ -11,6 +11,7 @@ import databasehelper.ConnectDatabase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -89,7 +90,6 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
         try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_INFO_ACTIVATE)) {
             stmt.setInt(1, accountId);
             stmt.setString(2, activateCode);
-            System.out.println("check info account: " + stmt.toString());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 System.out.println("true");
@@ -98,7 +98,6 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
         } catch (SQLException ex) {
             Logger.getLogger(BorrowerCardSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("false");
         return false;
     }
 
@@ -139,6 +138,21 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
             Logger.getLogger(BorrowerCardSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public int checkBorrowCard(int borrowCardID) {
+        try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_BORROW_CARD_EXISTED)) {
+            stmt.setInt(1, borrowCardID);
+            ResultSet res= stmt.executeQuery();
+            if(res.next()) {
+                Date expiredDay=res.getDate(5);
+               // Date toDay=S
+            }
+        } catch (SQLException ex) {
+            System.out.println("exppppppp="+ex);
+        }
+        return 0;
     }
     
 }
