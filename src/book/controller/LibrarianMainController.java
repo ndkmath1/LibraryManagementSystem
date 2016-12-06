@@ -44,6 +44,7 @@ public class LibrarianMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            new BorrowReturnBookManagementController(librarianMainForm);
         }
         
     }
@@ -52,6 +53,7 @@ public class LibrarianMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            
         }
         
     }

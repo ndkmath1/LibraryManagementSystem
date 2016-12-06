@@ -1,13 +1,12 @@
 package book.view;
-/**
- * form quản lý mượn trả sách
- * @author HUYNH
- */
-public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
+
+import java.awt.event.ActionListener;
+
+public class BorrowReturnBookManagementForm extends javax.swing.JFrame implements IBorrowReturnBookManagementForm{
    
     public BorrowReturnBookManagementForm( ) {
         initComponents();
-       
+        setTitle("Quản lý mượn trả");
         
     }
 
@@ -25,14 +24,14 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfBorrowCardID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tfBookCopyNumberID = new javax.swing.JTextField();
+        btnAddBookCopyID = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        tbBookCopyToBorrow = new javax.swing.JTable();
+        btnCheckBorrowCardID = new javax.swing.JButton();
+        btnAcceptToBorrow = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -50,28 +49,27 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
 
         jLabel3.setText("Mã sách cho mượn:");
 
-        jTextField2.setEnabled(false);
+        tfBookCopyNumberID.setEnabled(false);
 
-        jButton1.setText("Thêm");
-        jButton1.setEnabled(false);
+        btnAddBookCopyID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_add.png"))); // NOI18N
+        btnAddBookCopyID.setText("Thêm");
+        btnAddBookCopyID.setEnabled(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbBookCopyToBorrow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbBookCopyToBorrow);
 
-        jButton2.setText("Kiểm tra");
+        btnCheckBorrowCardID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_check.png"))); // NOI18N
+        btnCheckBorrowCardID.setText("Kiểm tra");
 
-        jButton3.setText("Xác nhận");
-        jButton3.setEnabled(false);
+        btnAcceptToBorrow.setText("Xác nhận");
+        btnAcceptToBorrow.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -87,17 +85,17 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tfBookCopyNumberID, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                            .addComponent(tfBorrowCardID))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(btnCheckBorrowCardID)
+                            .addComponent(btnAddBookCopyID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(217, 217, 217)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAcceptToBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -106,17 +104,17 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(tfBorrowCardID, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCheckBorrowCardID))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(tfBookCopyNumberID, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddBookCopyID))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(btnAcceptToBorrow)
                 .addContainerGap())
         );
 
@@ -206,6 +204,7 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
 
         jLabel1.setText("QUẢN LÝ MƯỢN, TRẢ SÁCH");
 
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back_icon.png"))); // NOI18N
         btnBack.setText("Quay lai");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,8 +221,7 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
                 .addGap(217, 217, 217)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addGap(27, 27, 27))
+                .addComponent(btnBack))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,10 +244,10 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAcceptToBorrow;
+    private javax.swing.JButton btnAddBookCopyID;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCheckBorrowCardID;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -264,10 +262,53 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbBookCopyToBorrow;
+    private javax.swing.JTextField tfBookCopyNumberID;
+    private javax.swing.JTextField tfBorrowCardID;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setButtonCheckBorrowCardIDActionListener(ActionListener listener) {
+        btnCheckBorrowCardID.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonAddBookCopyIDActionListener(ActionListener listener) {
+        btnAddBookCopyID.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonAcceptToBorrowActionListener(ActionListener listener) {
+        btnAcceptToBorrow.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonBackActionListener(ActionListener listener) {
+        btnBack.addActionListener(listener);
+    }
+
+    @Override
+    public String getTextFieldBorrowCardID() {
+        return tfBorrowCardID.getText();
+    }
+
+    @Override
+    public String getTextFieldBookCopyID() {
+        return tfBookCopyNumberID.getText();
+    }
+
+    @Override
+    public void openBorrowReturnMainForm() {
+        this.setVisible(true);
+    }
+
+    @Override
+    public void closeBorrowReturnMainForm() {
+        this.setVisible(false);
+        this.dispose();
+    }
+    
+    
 }

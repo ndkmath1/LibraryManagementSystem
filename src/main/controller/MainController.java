@@ -49,7 +49,7 @@ public class MainController {
         listBookResult=new ArrayList<>();
         for(Book book:listBooks) listBookResult.add(book);
         listCategoryBook=bookManagementSystem.getListCategory();
-        listCategoryBook.add(0, new CatetoryBook(0, "ALL", "Tất cả"));
+        listCategoryBook.add(0, new CatetoryBook(0, "AL", "Tất cả"));
         comboboxModel=new MyComboboxModel(listCategoryBook);
         mainForm.showListCategoryBook(comboboxModel);
         bookTableModel=new BookTableModel(listBookResult, listCategoryBook);
