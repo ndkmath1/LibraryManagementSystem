@@ -36,4 +36,6 @@ public interface IBookManagementSystem {
     public BookCopy getBookCopyInfo(String bookNumber, int bookCopyNumber);
     
     public void updateBookCopyInfo(BookCopy bookCopy);
+    
+    public CatetoryBook getCatetoryBookByID(int id);
 }

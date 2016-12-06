@@ -90,13 +90,13 @@ public final class AccountSQLStatement {
             + AccountTable.TABLE_NAME + " WHERE " + AccountTable.USERNAME_COL + "=?";
 
     public static final String QUERY_CHECK_STUDENTID_EXISTED = "SELECT " + StudentTable.STUDENT_ID_COL + " FROM "
-            + StudentTable.TABLE_NAME + " WHERE YEAR(" + StudentTable.BEGIN_DATE_COL + ")=? AND `"
-            + StudentTable.ORDER_COL + "`=?";
+            + StudentTable.TABLE_NAME + " WHERE YEAR(" + StudentTable.BEGIN_DATE_COL + ")=? AND "
+            + StudentTable.STUDENT_ID_COL + "=?";
 
     public static final String QUERY_CHECK_STUDENT_HAS_ACCOUNT = "SELECT "
             + StudentTable.TABLE_NAME + "." + StudentTable.STUDENT_ID_COL + " FROM " + StudentTable.TABLE_NAME + ", " + AccountTable.TABLE_NAME + " WHERE "
             + StudentTable.TABLE_NAME + "." + StudentTable.STUDENT_ID_COL + "=" + AccountTable.TABLE_NAME + "." + AccountTable.STUDENT_ID_COL
-            + " AND YEAR(begin_date)=? AND `order`=?";
+            + " AND YEAR(begin_date)=? AND student.student_id=?";
 
     
     public static final String QUERY_GET_ALL_BORROWER_CARD = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME;

@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package book.interfaces;
 
-/**
- *
- * @author Khanh Nguyen
- */
+import java.util.ArrayList;
+import model.Borrow;
+
 public interface IBorrowBookSystem {
+    public int saveNewBorrowedBook(int cardID);
+    
+    public void saveNewBorrowBookCopy(int borrowID, ArrayList<Integer> listBookCopyID);
     
 }

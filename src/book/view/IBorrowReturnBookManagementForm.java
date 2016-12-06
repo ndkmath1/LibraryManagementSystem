@@ -28,4 +28,7 @@ public interface IBorrowReturnBookManagementForm {
     public void showFieldsToAddBookCopy();
     
     public void disableFieldsToAddBookCopy();
+    
+    public void showTableBookCopy(BorrowBookTableModel tableModel);
+    
 }

@@ -128,7 +128,7 @@ public class AccountSystem implements IAccountSystem {
             if(result.next()) return result.getInt(1);
             else return 0;
         } catch (SQLException ex) {
-             System.out.println("ex account4="+ex);
+            System.out.println("ex account4="+ex);
         }
         return 0;
     }
