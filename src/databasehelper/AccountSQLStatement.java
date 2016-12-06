@@ -113,4 +113,5 @@ public final class AccountSQLStatement {
     
     public static final String CHECK_INFO_ACTIVATE = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME + " WHERE " + BorrowerCardTable.ACCOUNT_ID_COL + " = ? AND " + BorrowerCardTable.ACTIVATE_CODE_COL + " '?' ";
     
+    public static final String CHECK_BORROW_CARD_EXISTED="SELECT * FROM "+ BorrowerCardTable.TABLE_NAME + " WHERE " +BorrowerCardTable.BORROWER_CARD_ID_COL+"=?";
 }

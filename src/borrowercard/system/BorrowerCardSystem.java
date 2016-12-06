@@ -11,6 +11,7 @@ import databasehelper.ConnectDatabase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -107,6 +108,21 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
         mAccount.setStudentID(1);
         String b = bCardSystem.getInfoAccount(mAccount);
         System.out.println(b);
+    }
+
+    @Override
+    public int checkBorrowCard(int borrowCardID) {
+        try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_BORROW_CARD_EXISTED)) {
+            stmt.setInt(1, borrowCardID);
+            ResultSet res= stmt.executeQuery();
+            if(res.next()) {
+                Date expiredDay=res.getDate(5);
+               // Date toDay=S
+            }
+        } catch (SQLException ex) {
+            System.out.println("exppppppp="+ex);
+        }
+        return 0;
     }
     
 }

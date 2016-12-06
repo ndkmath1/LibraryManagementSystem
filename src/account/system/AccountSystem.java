@@ -25,9 +25,13 @@ public class AccountSystem implements IAccountSystem {
             ResultSet result= preparedStatement.executeQuery();
             if(result.next()){
                 Account account=new Account();
-                account.setUserName(result.getString(1));
-                account.setPassword(result.getString(2));
+                account.setAccounrID(result.getInt(1));
+                account.setUserName(result.getString(2));
                 account.setPassword(result.getString(3));
+                account.setPassword(result.getString(4));
+                account.setStatus(result.getBoolean(5));
+                account.setStudentID(result.getInt(7));
+                account.setUserID(result.getInt(6));
                 return account;
             }
             else return null;

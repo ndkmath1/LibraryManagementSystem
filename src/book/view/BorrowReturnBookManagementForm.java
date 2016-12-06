@@ -1,6 +1,7 @@
 package book.view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class BorrowReturnBookManagementForm extends javax.swing.JFrame implements IBorrowReturnBookManagementForm{
    
@@ -102,10 +103,11 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame implement
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfBorrowCardID, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCheckBorrowCardID))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfBorrowCardID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(btnCheckBorrowCardID)))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -310,5 +312,20 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame implement
         this.dispose();
     }
     
-    
+    @Override
+    public void noticeError(String title, String message) {
+        JOptionPane.showMessageDialog(this,message, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void noticeSuccessfully(String title, String message) {
+        JOptionPane.showMessageDialog(this,message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void showFieldsToAddBookCopy() {
+        tfBookCopyNumberID.setEnabled(true);
+        btnAddBookCopyID.setEnabled(true);
+        btnAcceptToBorrow.setEnabled(true);
+    }
 }

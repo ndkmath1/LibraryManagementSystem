@@ -1,6 +1,7 @@
 package book.view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public interface IBorrowReturnBookManagementForm {
     
@@ -19,4 +20,10 @@ public interface IBorrowReturnBookManagementForm {
     public void openBorrowReturnMainForm();
     
     public void closeBorrowReturnMainForm();
+    
+    public void noticeError(String title, String message);
+
+    public void noticeSuccessfully(String title, String message);
+    
+    public void showFieldsToAddBookCopy();
 }

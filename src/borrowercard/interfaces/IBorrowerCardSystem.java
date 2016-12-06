@@ -21,6 +21,8 @@ public interface IBorrowerCardSystem {
     public boolean checkInfoActivate(int accountId, String activateCode);
     
     public String setAccountActivated();
+    
+    public boolean isBorrowCardExisted(int borrowCardID);
    
     
 }
