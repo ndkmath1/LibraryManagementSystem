@@ -85,7 +85,7 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
     }
     
     public boolean checkInfoActivate(int accountId, String activateCode) {
-        try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement()) {
+        try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_INFO_ACTIVATE)) {
             
         } catch (SQLException ex) {
             Logger.getLogger(BorrowerCardSystem.class.getName()).log(Level.SEVERE, null, ex);

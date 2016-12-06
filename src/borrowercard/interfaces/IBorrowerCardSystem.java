@@ -18,7 +18,7 @@ public interface IBorrowerCardSystem {
     
     public String getInfoAccount(Account mAccount);
     
-    public boolean checkInfoActivate();
+    public boolean checkInfoActivate(int accountId, String activateCode);
     
     public String setAccountActivated();
    
