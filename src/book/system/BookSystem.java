@@ -280,6 +280,7 @@ public class BookSystem implements IBookManagementSystem, IBorrowBookSystem, IRe
                 bookCopy.setSequenceNumber(res.getInt(3));
                 bookCopy.setTypeOfCopy(res.getBoolean(4));
                 bookCopy.setPrince(res.getLong(5));
+                bookCopy.setReady(res.getBoolean(6));
                 return bookCopy;
             }
             else return null;

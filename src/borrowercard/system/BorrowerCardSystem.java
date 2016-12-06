@@ -112,17 +112,21 @@ public class BorrowerCardSystem implements IBorrowerCardSystem {
 
     @Override
     public int checkBorrowCard(int borrowCardID) {
+        System.out.println("cardid="+borrowCardID);
         try (PreparedStatement stmt = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.CHECK_BORROW_CARD_EXISTED)) {
             stmt.setInt(1, borrowCardID);
             ResultSet res= stmt.executeQuery();
             if(res.next()) {
                 Date expiredDay=res.getDate(5);
-               // Date toDay=S
+                Date toDay=new Date();
+                if(expiredDay.compareTo(toDay)<0) return 0;
+                else return 1;
             }
+            return -1;
         } catch (SQLException ex) {
             System.out.println("exppppppp="+ex);
         }
-        return 0;
+        return -1;
     }
     
 }

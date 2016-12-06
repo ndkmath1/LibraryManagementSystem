@@ -26,4 +26,6 @@ public interface IBorrowReturnBookManagementForm {
     public void noticeSuccessfully(String title, String message);
     
     public void showFieldsToAddBookCopy();
+    
+    public void disableFieldsToAddBookCopy();
 }

@@ -328,4 +328,11 @@ public class BorrowReturnBookManagementForm extends javax.swing.JFrame implement
         btnAddBookCopyID.setEnabled(true);
         btnAcceptToBorrow.setEnabled(true);
     }
+    
+    @Override
+    public void disableFieldsToAddBookCopy() {
+        tfBookCopyNumberID.setEnabled(false);
+        btnAddBookCopyID.setEnabled(false);
+        btnAcceptToBorrow.setEnabled(false);
+    }
 }
