@@ -53,7 +53,7 @@ public class LogInController {
                 if (account == null) {
                     loginForm.noticeError(LoginConstants.ERROR_ACCOUNT_NOT_FOUND_TITLE, LoginConstants.ERROR_ACCONT_NOT_FOUND);
                 } else {
-                    new UserMainController(loginForm);
+                    new UserMainController(loginForm, account);
                 }
             } else {
                 AccountManager accountManager = accountSystem.checkManageLogin(username, AccountHelper.getMD5encrypt(password));

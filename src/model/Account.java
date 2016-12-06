@@ -9,6 +9,7 @@ public class Account {
     private boolean status;
     private int accounrID;
     private int userID;
+    private int studentID;
     
     public Account () {}
     
@@ -69,6 +70,13 @@ public class Account {
         this.userID = userID;
     }
     
+    public int getStudentID() {
+        return studentID;
+    }
+    
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
     
     
 }

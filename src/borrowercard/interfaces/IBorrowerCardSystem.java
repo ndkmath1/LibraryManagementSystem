@@ -5,11 +5,22 @@
  */
 package borrowercard.interfaces;
 
+import model.Account;
+
 /**
  * Define responsibility of BorrowerCardSystem
  *
  * @author Khanh Nguyen
  */
 public interface IBorrowerCardSystem {
-
+    
+    public boolean getStateAccount(int accountId);
+    
+    public String getInfoAccount(Account mAccount);
+    
+    public boolean checkInfoActivate();
+    
+    public String setAccountActivated();
+   
+    
 }
