@@ -111,7 +111,9 @@ public final class AccountSQLStatement {
     
     public static final String GET_INFO_BY_STUDENT_ID = "SELECT * FROM " + StudentTable.TABLE_NAME + " WHERE " + StudentTable.STUDENT_ID_COL + " = ?";
     
-    public static final String CHECK_INFO_ACTIVATE = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME + " WHERE " + BorrowerCardTable.ACCOUNT_ID_COL + " = ? AND " + BorrowerCardTable.ACTIVATE_CODE_COL + " '?' ";
+    public static final String CHECK_INFO_ACTIVATE = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME + " WHERE " + BorrowerCardTable.ACCOUNT_ID_COL + " = ? AND " + BorrowerCardTable.ACTIVATE_CODE_COL + " = ? ";
+    
+    public static final String CHECK_ACCOUNT_HAS_BORROWER_CARD = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME + " WHERE " + BorrowerCardTable.ACCOUNT_ID_COL + " = ?";
     
     public static final String CHECK_BORROW_CARD_EXISTED="SELECT * FROM "+ BorrowerCardTable.TABLE_NAME + " WHERE " +BorrowerCardTable.BORROWER_CARD_ID_COL+"=?";
 }

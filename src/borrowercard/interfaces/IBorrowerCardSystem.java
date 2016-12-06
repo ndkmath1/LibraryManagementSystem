@@ -20,8 +20,10 @@ public interface IBorrowerCardSystem {
     
     public boolean checkInfoActivate(int accountId, String activateCode);
     
-    public String setAccountActivated();
+    public boolean setAccountActivated(int accountId);
     
+    public boolean isAccountHasBorrowerCard(int accountId);
+
     public int checkBorrowCard(int borrowCardID);
    
 }

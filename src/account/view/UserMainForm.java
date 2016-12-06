@@ -165,12 +165,17 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
 
     @Override
     public void nontifiesAccountIsActivated() {
-        JOptionPane.showMessageDialog(this, "Thông báo", "Tài khoản đã được kích hoạt", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Tài khoản đã được kích hoạt", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
-    public void nontifiesActivateCodeWrong() {
-        JOptionPane.showMessageDialog(this, "Thông báo", "Mã kích hoạt sai", JOptionPane.INFORMATION_MESSAGE);
+    public void nontifiesNotYetBorrowerCard() {
+        JOptionPane.showMessageDialog(this, "Chưa có thẻ mượn", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void setVisibleForm(boolean isVisible) {
+        setVisible(isVisible);
     }
     
 }

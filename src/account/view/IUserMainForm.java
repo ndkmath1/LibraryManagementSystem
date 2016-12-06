@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 
 public interface IUserMainForm {
 
+    public void setVisibleForm(boolean isVisible);
+    
     public void openUserMainForm();
 
     public void closeUserMainForm();
@@ -12,6 +14,6 @@ public interface IUserMainForm {
     
     public void nontifiesAccountIsActivated();
     
-    public void nontifiesActivateCodeWrong();
+    public void nontifiesNotYetBorrowerCard();
     
 }

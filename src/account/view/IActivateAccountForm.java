@@ -6,6 +6,7 @@
 package account.view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
 /**
  *
@@ -22,5 +23,13 @@ public interface IActivateAccountForm {
     public void setVisibleForm(boolean isVisible);
     
     public void closeForm();
+    
+    public void nontifiesActivateCodeWrong();
+    
+    public void nontifiesActivateSuccessful();
+    
+    public void setActivateCodeEditable(boolean b);
+    
+    public void setWindowsListenerForFom(WindowAdapter adapter);
     
 }

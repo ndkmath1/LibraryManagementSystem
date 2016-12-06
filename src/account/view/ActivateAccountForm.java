@@ -6,6 +6,9 @@
 package account.view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +21,7 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
      */
     public ActivateAccountForm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -30,7 +34,8 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbInfo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lbInfo = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnActivate = new javax.swing.JButton();
@@ -40,23 +45,24 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin tài khoản"));
 
-        lbInfo.setText("jLabel1");
+        lbInfo.setColumns(20);
+        lbInfo.setRows(5);
+        jScrollPane1.setViewportView(lbInfo);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(lbInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lbInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Mã kích hoạt");
@@ -81,9 +87,9 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(31, 31, 31)
+                .addGap(29, 29, 29)
                 .addComponent(tfActivatecCode, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(42, 42, 42)
                 .addComponent(btnActivate)
                 .addGap(67, 67, 67))
         );
@@ -102,16 +108,15 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -165,7 +170,8 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbInfo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea lbInfo;
     private javax.swing.JTextField tfActivatecCode;
     // End of variables declaration//GEN-END:variables
 
@@ -181,6 +187,8 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
 
     @Override
     public void setTextForLabelInfo(String info) {
+        lbInfo.setEditable(false);
+        btnActivate.setEnabled(false);
         lbInfo.setText(info);
     }
 
@@ -193,4 +201,25 @@ public class ActivateAccountForm extends javax.swing.JFrame implements IActivate
     public void closeForm() {
         super.dispose();
     }
+
+    @Override
+    public void nontifiesActivateCodeWrong() {
+        JOptionPane.showMessageDialog(this, "Mã kích hoạt sai", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void nontifiesActivateSuccessful() {
+        JOptionPane.showMessageDialog(this, "Kích hoạt tài khoản thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void setActivateCodeEditable(boolean b) {
+        tfActivatecCode.setEditable(b);
+    }
+    
+    @Override
+    public void setWindowsListenerForFom(WindowAdapter adapter) {
+        this.addWindowListener(adapter);
+    }
+    
 }
