@@ -20,6 +20,7 @@ public interface IAccountSystem {
     public int isStudentIDExisted(String studentIDNumber);
     
     public boolean isStudentHasAccount(String studentIDNumber);
+   
     
 
 }

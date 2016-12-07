@@ -182,10 +182,14 @@ public class LibrarianMainForm extends javax.swing.JFrame implements ILibrarianM
     }
 
     
-    
     @Override
     public void closeLibrarianMainForm() {
         this.setVisible(false);
         this.dispose();
+    }
+
+    @Override
+    public void setVisibleForm(boolean isVisible) {
+        setVisible(isVisible);
     }
 }

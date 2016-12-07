@@ -3,6 +3,7 @@ package book.controller;
 import account.view.ILogInForm;
 import book.view.ILibrarianMainForm;
 import book.view.LibrarianMainForm;
+import borrowercard.controller.BorrowerCardController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -53,9 +54,9 @@ public class LibrarianMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            librarianMainForm.setVisibleForm(false);
+            new BorrowerCardController(librarianMainForm);
         }
-        
     }
       
     private class ButtonLogoutListener implements ActionListener{

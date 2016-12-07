@@ -5,6 +5,9 @@
  */
 package borrowercard.view;
 
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Khanh Nguyen
@@ -27,17 +30,70 @@ public class IssuedBorrowerCardForm extends javax.swing.JFrame implements IIssue
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        tfId = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtInfo = new javax.swing.JTextArea();
+        btnIssued = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Số CMND hoặc MSSV");
+
+        btnSearch.setText("Kiểm tra thông tin");
+
+        txtInfo.setColumns(20);
+        txtInfo.setRows(5);
+        jScrollPane1.setViewportView(txtInfo);
+
+        btnIssued.setText("Cấp thẻ mượn");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch)))
+                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnIssued)
+                .addGap(227, 227, 227))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(btnIssued)
+                .addGap(34, 34, 34))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -71,16 +127,14 @@ public class IssuedBorrowerCardForm extends javax.swing.JFrame implements IIssue
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IssuedBorrowerCardForm().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new IssuedBorrowerCardForm().setVisible(true);
         });
     }
 
     @Override
     public void setVisibleForm(boolean isVisible) {
-        setVisibleForm(isVisible);
+        setVisible(isVisible);
     }
 
     @Override
@@ -89,5 +143,50 @@ public class IssuedBorrowerCardForm extends javax.swing.JFrame implements IIssue
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIssued;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextArea txtInfo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setButtonSearchActionListener(ActionListener listener) {
+        btnSearch.addActionListener(listener);
+    }
+
+    @Override
+    public void setButtonIssuedActionListener(ActionListener listener) {
+        btnIssued.addActionListener(listener);
+    }
+
+    @Override
+    public String getId() {
+        return tfId.getText();
+    }
+
+    @Override
+    public void setTextAreaInfo(String info) {
+        txtInfo.setText(info);
+    }
+
+    @Override
+    public void nontifiesInfoWrong() {
+        JOptionPane.showMessageDialog(this, "Nhập sai thông tin", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void nontifiesSuccessful(String info) {
+        JOptionPane.showMessageDialog(this, info, "Thông tin thẻ mượn", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void setButtonIssuedEnable(boolean b) {
+        btnIssued.setEnabled(false);
+    }
+    
+    
+    
 }

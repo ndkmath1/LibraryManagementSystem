@@ -116,4 +116,29 @@ public final class AccountSQLStatement {
     public static final String CHECK_ACCOUNT_HAS_BORROWER_CARD = "SELECT * FROM " + BorrowerCardTable.TABLE_NAME + " WHERE " + BorrowerCardTable.ACCOUNT_ID_COL + " = ?";
     
     public static final String CHECK_BORROW_CARD_EXISTED="SELECT * FROM "+ BorrowerCardTable.TABLE_NAME + " WHERE " +BorrowerCardTable.BORROWER_CARD_ID_COL+"=?";
+    
+    public static final String GET_STUDENT_BY_ID = "SELECT * FROM " + StudentTable.TABLE_NAME + " WHERE " + StudentTable.STUDENT_ID_COL + " = ?";
+    
+    public static final String GET_USER_BY_ID = "SELECT * FROM " + UserTable.TABLE_NAME + " WHERE " + UserTable.NATIONAL_COL + " = ?";
+    
+    //Check has borrowercard by identification
+    public static final String CHECK_HAS_BORROWERCARD_IDENTIFICATION = "SELECT * FROM " + AccountTable.TABLE_NAME + ", " + UserTable.TABLE_NAME + ", " + BorrowerCardTable.TABLE_NAME + 
+            " WHERE " + UserTable.TABLE_NAME + "." + UserTable.NATIONAL_COL + " = ? AND " + UserTable.TABLE_NAME + "." + UserTable.USER_ID_COL + " = " + AccountTable.TABLE_NAME + "." + AccountTable.USER_ID_COL
+           + " AND "  + AccountTable.TABLE_NAME + "." + AccountTable.ACCOUNT_ID_COL + " = " + BorrowerCardTable.TABLE_NAME + "." + BorrowerCardTable.ACCOUNT_ID_COL;
+    
+    //Check has borrowercard by student id
+        public static final String CHECK_HAS_BORROWERCARD_STUDENT_ID = "SELECT * FROM " + AccountTable.TABLE_NAME + ", " + StudentTable.TABLE_NAME + ", " + BorrowerCardTable.TABLE_NAME + 
+            " WHERE " + StudentTable.TABLE_NAME + "." + StudentTable.STUDENT_ID_COL + " = ? AND " + StudentTable.TABLE_NAME + "." + StudentTable.STUDENT_ID_COL + " = " + AccountTable.TABLE_NAME + "." + AccountTable.STUDENT_ID_COL
+           + " AND "  + AccountTable.TABLE_NAME + "." + AccountTable.ACCOUNT_ID_COL + " = " + BorrowerCardTable.TABLE_NAME + "." + BorrowerCardTable.ACCOUNT_ID_COL;
+        
+        public static final String GEN_BORROWER_CARD = "INSERT INTO " + BorrowerCardTable.TABLE_NAME + " VALUES(?, ?, ?, ?, ?)";
+        
+        public static final String GET_USER_INFO_BY_IDEN = "SELECT " + AccountTable.TABLE_NAME + "." + AccountTable.ACCOUNT_ID_COL + " FROM " + AccountTable.TABLE_NAME  + ", " + UserTable.TABLE_NAME + " WHERE " + 
+                AccountTable.TABLE_NAME + "."  + AccountTable.USER_ID_COL + " = " + UserTable.TABLE_NAME + "." + UserTable.USER_ID_COL + " AND " + UserTable.TABLE_NAME + "."+ UserTable.NATIONAL_COL + " = ?";
+        
+        public static final String GET_STUDENT_INFO_BY_IDEN = "SELECT " +  AccountTable.TABLE_NAME + "." + AccountTable.ACCOUNT_ID_COL + " FROM " + AccountTable.TABLE_NAME  + ", " + StudentTable.TABLE_NAME + " WHERE " + 
+                AccountTable.TABLE_NAME + "."  + AccountTable.STUDENT_ID_COL + " = " + StudentTable.TABLE_NAME + "." + StudentTable.STUDENT_ID_COL + " AND " + StudentTable.TABLE_NAME + "." + StudentTable.STUDENT_ID_COL + " = ?";
+        
+        public static final String GET_ACCOUNT_ID_BY_ST_ID = "SELECT * FROM  " + AccountTable.TABLE_NAME + " WHERE " + AccountTable.STUDENT_ID_COL + " = ?";
+            
 }

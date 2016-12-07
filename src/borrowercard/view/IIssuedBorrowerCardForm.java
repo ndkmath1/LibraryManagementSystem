@@ -5,6 +5,8 @@
  */
 package borrowercard.view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Khanh Nguyen
@@ -14,5 +16,19 @@ public interface IIssuedBorrowerCardForm {
     public void setVisibleForm(boolean isVisible);
     
     public void closeForm();
+    
+    public void setButtonSearchActionListener(ActionListener listener);
+    
+    public void setButtonIssuedActionListener(ActionListener listener);
+    
+    public String getId();
+    
+    public void setTextAreaInfo(String info);
+    
+    public void nontifiesInfoWrong();
+    
+    public void nontifiesSuccessful(String info);
+    
+    public void setButtonIssuedEnable(boolean b);
     
 }

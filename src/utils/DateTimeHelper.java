@@ -20,4 +20,9 @@ public class DateTimeHelper {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         return df.format(date).toString();
     }
+    
+    public static String formatDateSQL(Date date) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date).toString();
+    }
 }

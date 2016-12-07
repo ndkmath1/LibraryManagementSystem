@@ -19,5 +19,7 @@ public interface ILibrarianMainForm {
     
     public void closeLibrarianMainForm();
     
+    public void setVisibleForm(boolean isVisible);
+    
     
 }

@@ -3,9 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/controller/BookManagementController.java</file>
-            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/view/BookManagementForm.java</file>
-            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/view/IBookManagementForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/view/IssuedBorrowerCardForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/interfaces/IAccountSystem.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/view/UserMainForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/book/controller/LibrarianMainController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/controller/ActivateAccountController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/view/IUserMainForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/controller/BorrowerCardController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/main/view/MainForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/databasehelper/AccountSQLStatement.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/view/IBorrowerCardForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/controller/UserMainController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/view/IActivateAccountForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/main/controller/MainController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/utils/BorrowerCardHelper.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/book/view/LibrarianMainForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/controller/IssuedBorrowerCardController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/view/IIssuedBorrowerCardForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/system/AccountSystem.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/book/view/ILibrarianMainForm.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/interfaces/IBorrowerCardSystem.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/controller/LogInController.java</file>
+            <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/system/BorrowerCardSystem.java</file>
         </group>
     </open-files>
 </project-private>

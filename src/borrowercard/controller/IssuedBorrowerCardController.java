@@ -5,8 +5,14 @@
  */
 package borrowercard.controller;
 
+import borrowercard.factory.BorrowerCardSystemFactory;
+import borrowercard.interfaces.IBorrowerCardSystem;
+import borrowercard.view.IBorrowerCardForm;
 import borrowercard.view.IIssuedBorrowerCardForm;
 import borrowercard.view.IssuedBorrowerCardForm;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import utils.BorrowerCardHelper;
 
 /**
  *
@@ -15,9 +21,52 @@ import borrowercard.view.IssuedBorrowerCardForm;
 public class IssuedBorrowerCardController {
 
     private IIssuedBorrowerCardForm issuedBCF;
+    private IBorrowerCardForm bCardForm;
+    private IBorrowerCardSystem bCardSystem = BorrowerCardSystemFactory.getBorrowerCardSystem();
 
-    public IssuedBorrowerCardController() {
+    public IssuedBorrowerCardController(IBorrowerCardForm bCardForm) {
+        this.bCardForm = bCardForm;
         issuedBCF = new IssuedBorrowerCardForm();
+        issuedBCF.setVisibleForm(true);
+        issuedBCF.setButtonSearchActionListener(new SearchButtonListener());
+        issuedBCF.setButtonIssuedActionListener(new IssuedButtonListener());
+    }
+
+    private class SearchButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!BorrowerCardHelper.validateId(issuedBCF.getId())) {
+                issuedBCF.nontifiesInfoWrong();
+            } else {
+                String str = bCardSystem.getInfoUser(issuedBCF.getId());
+                if (str.length() == 0) {
+                    issuedBCF.nontifiesInfoWrong();
+                } else {
+                    int b = bCardSystem.checkStateBorrowerCard(issuedBCF.getId());
+                    if (b < 0) {
+                        str += "\nTrạng thái: Đã có thẻ mượn";
+                        issuedBCF.setButtonIssuedEnable(false);
+                    } else {
+                        str += "\nTrạng thái: Chưa có thẻ mượn";
+                    }
+                    issuedBCF.setTextAreaInfo(str);
+                }
+            }
+        }
+
+    }
+
+    private class IssuedButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String str = bCardSystem.getInfoUser(issuedBCF.getId());
+            int b = bCardSystem.checkStateBorrowerCard(issuedBCF.getId());
+            String iss = bCardSystem.issuedBorrowerCard(b);
+            issuedBCF.nontifiesSuccessful(str + "\n" + iss);
+        }
+
     }
 
 }

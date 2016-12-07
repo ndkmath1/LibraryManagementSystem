@@ -13,18 +13,31 @@ import model.Account;
  * @author Khanh Nguyen
  */
 public interface IBorrowerCardSystem {
-    
+
     public boolean getStateAccount(int accountId);
-    
+
     public String getInfoAccount(Account mAccount);
-    
+
     public boolean checkInfoActivate(int accountId, String activateCode);
-    
+
     public boolean setAccountActivated(int accountId);
-    
+
     public boolean isAccountHasBorrowerCard(int accountId);
 
     public int checkBorrowCard(int borrowCardID);
-   
+
+    public int checkStateBorrowerCard(String id);
+
+    /**
+     * Get information of user
+     *
+     * @param id student id or identification
+     * @return
+     */
+    public String getInfoUser(String id);
     
+    public String issuedBorrowerCard(int accountId);
+    
+    
+
 }
