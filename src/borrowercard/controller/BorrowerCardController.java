@@ -24,7 +24,7 @@ public class BorrowerCardController {
         bCardForm = new BorrowerCardForm();
         bCardForm.setVisibleForm(true);
         bCardForm.setButtonIssuedListener(new IssuedButtonActionListener());
-        
+        bCardForm.setButtonBackListener(new BackButtonActionListener());
     }
     
     private class IssuedButtonActionListener implements ActionListener {
@@ -33,6 +33,16 @@ public class BorrowerCardController {
         public void actionPerformed(ActionEvent e) {
             bCardForm.setVisibleForm(false);
             new IssuedBorrowerCardController(bCardForm);
+        }
+        
+    }
+    
+    private class BackButtonActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bCardForm.setVisibleForm(false);
+            libForm.setVisibleForm(true);
         }
         
     }

@@ -21,6 +21,8 @@ public interface IIssuedBorrowerCardForm {
     
     public void setButtonIssuedActionListener(ActionListener listener);
     
+    public void setButtonBackActionListener(ActionListener listener);
+    
     public String getId();
     
     public void setTextAreaInfo(String info);

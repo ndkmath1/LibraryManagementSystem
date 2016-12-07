@@ -15,6 +15,8 @@ public interface IBorrowerCardForm {
     
     public void setButtonIssuedListener(ActionListener listener);
     
+    public void setButtonBackListener(ActionListener listener);
+    
     public void setVisibleForm(boolean isVisible);
     
     public void closeForm();

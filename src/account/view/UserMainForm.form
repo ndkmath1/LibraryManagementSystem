@@ -73,12 +73,12 @@
                 <Property name="text" type="java.lang.String" value="K&#xed;ch ho&#x1ea1;t t&#xe0;i kho&#x1ea3;n"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemLogOut">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemLogOutActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

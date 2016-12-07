@@ -38,7 +38,7 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         menuItemActivateAccount = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuItemLogOut = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -93,13 +93,13 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
         menuItemActivateAccount.setText("Kích hoạt tài khoản");
         jMenu7.add(menuItemActivateAccount);
 
-        jMenuItem3.setText("Đăng xuất");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menuItemLogOut.setText("Đăng xuất");
+        menuItemLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menuItemLogOutActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem3);
+        jMenu7.add(menuItemLogOut);
 
         jMenuBar1.add(jMenu7);
 
@@ -127,9 +127,9 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void menuItemLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLogOutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_menuItemLogOutActionPerformed
 
     @Override
     public void openUserMainForm() {
@@ -152,8 +152,8 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem menuItemActivateAccount;
+    private javax.swing.JMenuItem menuItemLogOut;
     private javax.swing.JPanel pnLogo;
     private javax.swing.JPanel pnMain;
     // End of variables declaration//GEN-END:variables
@@ -176,6 +176,11 @@ public class UserMainForm extends javax.swing.JFrame implements IUserMainForm {
     @Override
     public void setVisibleForm(boolean isVisible) {
         setVisible(isVisible);
+    }
+
+    @Override
+    public void setMenuItemLogOutListener(ActionListener listener) {
+        menuItemLogOut.addActionListener(listener);
     }
     
 }

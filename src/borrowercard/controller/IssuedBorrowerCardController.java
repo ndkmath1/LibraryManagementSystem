@@ -30,9 +30,19 @@ public class IssuedBorrowerCardController {
         issuedBCF.setVisibleForm(true);
         issuedBCF.setButtonSearchActionListener(new SearchButtonListener());
         issuedBCF.setButtonIssuedActionListener(new IssuedButtonListener());
+        issuedBCF.setButtonBackActionListener(new BackButtonListener());
     }
 
     private class SearchButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            checkInfo();
+        }
+
+    }
+
+    private class IssuedButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -51,22 +61,43 @@ public class IssuedBorrowerCardController {
                         str += "\nTrạng thái: Chưa có thẻ mượn";
                     }
                     issuedBCF.setTextAreaInfo(str);
+                    String iss = bCardSystem.issuedBorrowerCard(b);
+                    issuedBCF.nontifiesSuccessful(str + "\n" + iss);
                 }
             }
+
         }
 
     }
 
-    private class IssuedButtonListener implements ActionListener {
+    private class BackButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String str = bCardSystem.getInfoUser(issuedBCF.getId());
-            int b = bCardSystem.checkStateBorrowerCard(issuedBCF.getId());
-            String iss = bCardSystem.issuedBorrowerCard(b);
-            issuedBCF.nontifiesSuccessful(str + "\n" + iss);
+            bCardForm.setVisibleForm(true);
+            issuedBCF.setVisibleForm(false);
         }
 
+    }
+
+    private void checkInfo() {
+        if (!BorrowerCardHelper.validateId(issuedBCF.getId())) {
+            issuedBCF.nontifiesInfoWrong();
+        } else {
+            String str = bCardSystem.getInfoUser(issuedBCF.getId());
+            if (str.length() == 0) {
+                issuedBCF.nontifiesInfoWrong();
+            } else {
+                int b = bCardSystem.checkStateBorrowerCard(issuedBCF.getId());
+                if (b < 0) {
+                    str += "\nTrạng thái: Đã có thẻ mượn";
+                    issuedBCF.setButtonIssuedEnable(false);
+                } else {
+                    str += "\nTrạng thái: Chưa có thẻ mượn";
+                }
+                issuedBCF.setTextAreaInfo(str);
+            }
+        }
     }
 
 }

@@ -16,4 +16,6 @@ public interface IUserMainForm {
     
     public void nontifiesNotYetBorrowerCard();
     
+    public void setMenuItemLogOutListener(ActionListener listener);
+    
 }
