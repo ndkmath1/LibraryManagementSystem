@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/view/IssuedBorrowerCardForm.java</file>
             <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/interfaces/IAccountSystem.java</file>
             <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/view/UserMainForm.java</file>
@@ -25,6 +26,13 @@
             <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/interfaces/IBorrowerCardSystem.java</file>
             <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/account/controller/LogInController.java</file>
             <file>file:/E:/Google%20Drive/ICT/20152/Java/Source/LMS/src/borrowercard/system/BorrowerCardSystem.java</file>
+=======
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/interfaces/IBorrowBookSystem.java</file>
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/system/BookSystem.java</file>
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/controller/BorrowReturnBookManagementController.java</file>
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/book/view/IBorrowReturnBookManagementForm.java</file>
+            <file>file:/F:/PROJECTS/TKXDPM/LibraryManagementSystem/src/databasehelper/BookSQLStatement.java</file>
+>>>>>>> 7e269b71868787f478c361865f9f8335758c406b
         </group>
     </open-files>
 </project-private>

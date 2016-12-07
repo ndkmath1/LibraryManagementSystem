@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Book;
@@ -272,6 +273,7 @@ public class BookSystem implements IBookManagementSystem, IBorrowBookSystem, IRe
             PreparedStatement ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_GET_BOOK_COPY_INFO);
             ps.setString(1, bookNumber);
             ps.setInt(2, bookCopyNumber);
+            System.out.println("xxxxxxxx="+ps.toString());
             ResultSet res=ps.executeQuery();
             if(res.next()){
                 BookCopy bookCopy=new BookCopy();
@@ -280,6 +282,7 @@ public class BookSystem implements IBookManagementSystem, IBorrowBookSystem, IRe
                 bookCopy.setSequenceNumber(res.getInt(3));
                 bookCopy.setTypeOfCopy(res.getBoolean(4));
                 bookCopy.setPrince(res.getLong(5));
+                bookCopy.setReady(res.getBoolean(6));
                 return bookCopy;
             }
             else return null;
@@ -315,5 +318,61 @@ public class BookSystem implements IBookManagementSystem, IBorrowBookSystem, IRe
             System.out.println("book ex2="+ex);
         }
         return 0;
+    }
+
+    @Override
+    public CatetoryBook getCatetoryBookByID(int id) {
+        try {
+            PreparedStatement ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_GET_CATEGORY_BY_ID);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                return new CatetoryBook(id, rs.getString(2), rs.getString(3));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println("book ex2="+ex);
+        }
+        return null;
+    }
+
+    @Override
+    public int saveNewBorrowedBook(int cardID) {
+        try {
+            PreparedStatement ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_SAVE_NEW_BORROW);
+            ps.setInt(1, cardID);
+            Date today=new Date();
+            ps.setDate(2, new java.sql.Date(today.getTime()));
+            Date expired=new Date(today.getTime() + (1000 * 60 * 60 * 24*14));
+            ps.setDate(3, new java.sql.Date(expired.getTime()));
+            ps.execute();
+        } catch (SQLException ex) {
+            System.out.println("book ex2="+ex);
+        }
+        
+        try {
+            PreparedStatement ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_GET_BORROW_ID);
+            ps.setInt(1, cardID);
+            ResultSet res=ps.executeQuery();
+            return res.getInt(1);
+        } catch (SQLException ex) {
+            System.out.println("book ex2="+ex);
+        }
+        
+        return 0;
+    }
+
+    @Override
+    public void saveNewBorrowBookCopy(int borrowID, ArrayList<Integer> listBookCopyID) {
+        for(int i=0;i<listBookCopyID.size();i++)
+        try {
+            PreparedStatement ps=ConnectDatabase.getConnection().prepareStatement(BookSQLStatement.QUERY_SAVE_NEW_BORROW_BOOK_COPY);
+            ps.setInt(1, borrowID);
+            ps.setInt(2, listBookCopyID.get(i));
+            ps.setBoolean(3, false);
+            ps.execute();
+        } catch (SQLException ex) {
+            System.out.println("book ex2="+ex);
+        }
     }
 }

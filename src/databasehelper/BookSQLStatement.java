@@ -66,5 +66,12 @@ public class BookSQLStatement {
     
     public static final String QUERY_UPDATE_BOOK_COPY_INFO="UPDATE book_copy SET type=?, price=? WHERE id=?";
 
+    public static final String QUERY_GET_CATEGORY_BY_ID="SELECT * FROM category WHERE id=?";
+    
+    public static final String QUERY_SAVE_NEW_BORROW="INSERT INTO borrow values(null, ?, ?, ?)";
+    
+    public static final String QUERY_GET_BORROW_ID="SELECT * FROM borrow WHERE card_id=?";
+    
+    public static final String QUERY_SAVE_NEW_BORROW_BOOK_COPY="INSERT INTO borrow_book_copy VALUES(null, ?, ?, ?)";
 }
 

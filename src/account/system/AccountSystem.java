@@ -123,21 +123,19 @@ public class AccountSystem implements IAccountSystem {
         return false;
     }
 
+
     @Override
     public int isStudentIDExisted(String studentIDNumber) {
-        StudentID studentID = new StudentID(studentIDNumber);
+        StudentID studentID=new StudentID(studentIDNumber);
         try {
-            PreparedStatement preparedStatement = ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_CHECK_STUDENTID_EXISTED);
-            preparedStatement.setInt(1, studentID.getYear());
+            PreparedStatement preparedStatement= ConnectDatabase.getConnection().prepareStatement(AccountSQLStatement.QUERY_CHECK_STUDENTID_EXISTED);
+            preparedStatement.setInt(1, studentID.getYear());         
             preparedStatement.setInt(2, studentID.getOrder());
-            ResultSet result = preparedStatement.executeQuery();
-            if (result.next()) {
-                return result.getInt(1);
-            } else {
-                return 0;
-            }
+            ResultSet result= preparedStatement.executeQuery();
+            if(result.next()) return result.getInt(1);
+            else return 0;
         } catch (SQLException ex) {
-            System.out.println("ex account4=" + ex);
+            System.out.println("ex account4="+ex);
         }
         return 0;
     }

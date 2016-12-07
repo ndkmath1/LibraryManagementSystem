@@ -38,6 +38,4 @@ public interface IBorrowerCardSystem {
     
     public String issuedBorrowerCard(int accountId);
     
-    
-
 }

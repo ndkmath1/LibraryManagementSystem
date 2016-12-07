@@ -6,16 +6,18 @@ public class BookCopy {
     private int sequenceNumber;
     private boolean typeOfCopy;
     private long prince;
+    private boolean ready;
     
     public BookCopy(){
         
     }
 
-    public BookCopy(int bookID, int sequenceNumber, boolean typeOfCopy, long prince) {
+    public BookCopy(int bookID, int sequenceNumber, boolean typeOfCopy, long prince, boolean ready) {
         this.bookID = bookID;
         this.sequenceNumber = sequenceNumber;
         this.typeOfCopy = typeOfCopy;
         this.prince = prince;
+        this.ready=ready;
     }
 
     public int getBookCopyID() {
@@ -56,6 +58,14 @@ public class BookCopy {
 
     public void setPrince(long prince) {
         this.prince = prince;
+    }
+    
+    public void setReady(boolean ready){
+        this.ready=ready;
+    }
+    
+    public boolean isReady(){
+        return this.ready;
     }
     
     
